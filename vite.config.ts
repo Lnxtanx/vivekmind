@@ -6,12 +6,17 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   plugins: [
-    tanstackStart(),
+    tanstackStart({
+      target: 'cloudflare-module',
+    }),
     tailwindcss(),
     tsconfigPaths(),
   ],
   server: {
     port: 8000,
     host: true,
+  },
+  optimizeDeps: {
+    exclude: ["@tanstack/start-server-core"],
   },
 });
