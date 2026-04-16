@@ -11,7 +11,7 @@ export const Route = createFileRoute("/privacy")({
       { property: "og:title", content: "Privacy Policy — VivekMind" },
       { property: "og:description", content: "How VivekMind collects, uses, and protects your data across all its products." },
       { property: "og:url", content: "https://vivekmind.com/privacy" },
-      { name: "robots", content: "noindex, follow" },
+      { name: "robots", content: "index, follow" },
     ],
     links: [{ rel: "canonical", href: "https://vivekmind.com/privacy" }],
   }),

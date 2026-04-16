@@ -11,7 +11,7 @@ export const Route = createFileRoute("/terms")({
       { property: "og:title", content: "Terms of Service — VivekMind" },
       { property: "og:description", content: "Rules and guidelines for using VivekMind products and services." },
       { property: "og:url", content: "https://vivekmind.com/terms" },
-      { name: "robots", content: "noindex, follow" },
+      { name: "robots", content: "index, follow" },
     ],
     links: [{ rel: "canonical", href: "https://vivekmind.com/terms" }],
   }),
