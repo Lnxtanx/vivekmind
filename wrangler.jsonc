@@ -3,7 +3,7 @@
   "name": "vivekmind",
   "compatibility_date": "2025-09-24",
   "compatibility_flags": ["nodejs_compat"],
-  "main": "@tanstack/react-start/server-entry",
+  "main": "./node_modules/@tanstack/react-start/dist/default-entry/esm/server.js",
   "assets": {
     "directory": "./public"
   }
