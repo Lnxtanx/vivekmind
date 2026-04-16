@@ -9,7 +9,7 @@ export function Header() {
     <header className="sticky top-0 z-50 bg-background/70 backdrop-blur-xl">
       <div className="mx-auto flex h-18 max-w-7xl items-center justify-between px-6 lg:px-8">
         <Link to="/" className="flex items-center gap-2.5">
-          <img src={logo} alt="VivekMind" className="h-9 w-auto" />
+          <img src={logo} alt="VivekMind Logo" className="h-9 w-auto" />
           <span className="text-xl font-bold tracking-tight text-foreground">VivekMind</span>
         </Link>
 

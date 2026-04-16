@@ -1,147 +1,179 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import logo from "../assets/vivekmind-logo.png";
+
+const PRODUCT_URLS = {
+  schemaWeaver: "https://schemaweaver.vivekmind.com",
+  sqlEditor: "https://sql-editor.schemaweaver.vivekmind.com",
+  dataExplorer: "https://data-explorer.schemaweaver.vivekmind.com",
+  swDocs: "https://docs.schemaweaver.vivekmind.com",
+  fairyForge: "https://fairyforge.vivekmind.com",
+  press: "https://press.vivekmind.com",
+};
+
+const products = [
+  {
+    index: "01",
+    name: "Schema Weaver",
+    category: "Database Tools",
+    description:
+      "PostgreSQL schema management platform. Design and version your database schema visually, push migrations safely with drift detection, and explore live data with AI.",
+    href: PRODUCT_URLS.schemaWeaver,
+    subLinks: [
+      { label: "SQL Editor", href: PRODUCT_URLS.sqlEditor },
+      { label: "Data Explorer", href: PRODUCT_URLS.dataExplorer },
+      { label: "Docs", href: PRODUCT_URLS.swDocs },
+    ],
+  },
+  {
+    index: "02",
+    name: "FairyForge",
+    category: "Workflow Automation",
+    description:
+      "Workflow intelligence engine. Build and orchestrate AI-powered workflows that respond to events, process data, and integrate with any system — from simple triggers to complex multi-step pipelines.",
+    href: PRODUCT_URLS.fairyForge,
+  },
+  {
+    index: "03",
+    name: "VivekMind Press",
+    category: "Content Platform",
+    description:
+      "AI-assisted publishing platform. Create, manage, and distribute technical content at scale — documentation, newsletters, and long-form articles — with AI as a native part of the workflow.",
+    href: PRODUCT_URLS.press,
+  },
+];
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "VivekMind — Pioneering AI Systems & Intelligent Infrastructure" },
-      { name: "description", content: "VivekMind builds AI systems, models, and infrastructure that power the future of intelligent technology." },
-      { property: "og:title", content: "VivekMind — Pioneering AI Systems & Intelligent Infrastructure" },
-      { property: "og:description", content: "VivekMind builds AI systems, models, and infrastructure that power the future of intelligent technology." },
+      { title: "VivekMind — AI Systems, Tools & Infrastructure" },
+      {
+        name: "description",
+        content:
+          "VivekMind designs and builds AI-powered products for developers and technical teams. Schema Weaver (PostgreSQL tools), FairyForge (workflow automation), and VivekMind Press (publishing platform).",
+      },
+      { property: "og:title", content: "VivekMind — AI Systems, Tools & Infrastructure" },
+      {
+        property: "og:description",
+        content:
+          "AI-powered products for developers and teams. Schema Weaver, FairyForge, and VivekMind Press — built by VivekMind.",
+      },
+      { property: "og:url", content: "https://vivekmind.com/" },
+      { name: "twitter:title", content: "VivekMind — AI Systems, Tools & Infrastructure" },
+      {
+        name: "twitter:description",
+        content:
+          "Schema Weaver, FairyForge, VivekMind Press — AI-powered products for developers and technical teams.",
+      },
     ],
+    links: [{ rel: "canonical", href: "https://vivekmind.com/" }],
   }),
   component: Index,
 });
 
+function ArrowUpRight() {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M7 17 17 7M7 7h10v10" />
+    </svg>
+  );
+}
+
+function ArrowRight() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+      <path d="M5 12h14M12 5l7 7-7 7" />
+    </svg>
+  );
+}
+
 function Index() {
   return (
     <div>
-      {/* Hero */}
+      {/* ── Hero ─────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
-        <div className="relative mx-auto max-w-7xl px-6 py-28 md:py-40 lg:px-8">
-          <div className="flex items-center gap-3 mb-8">
-            <img src={logo} alt="" className="h-12 w-auto" />
-          </div>
-          <h1 className="max-w-4xl text-5xl font-extrabold leading-[1.08] tracking-tight text-foreground md:text-6xl lg:text-7xl">
-            Building the future of{" "}
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.04] to-transparent pointer-events-none" />
+        <div className="relative mx-auto max-w-7xl px-6 pt-20 pb-20 md:pt-36 md:pb-28 lg:px-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-8">VivekMind</p>
+          <h1 className="max-w-3xl text-5xl font-extrabold leading-[1.06] tracking-tight text-foreground md:text-6xl lg:text-[5.25rem]">
+            AI systems,{" "}
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              intelligent systems
+              tools &amp; infrastructure.
             </span>
           </h1>
-          <p className="mt-7 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-            We design and build AI systems, infrastructure, and models that solve complex problems at scale — empowering businesses and developers to create what's next.
+          <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+            We design and build intelligent products for developers, data teams, and technical organisations — software that thinks alongside you.
           </p>
-          <div className="mt-11 flex flex-wrap gap-4">
+          <div className="mt-10 flex flex-wrap items-center gap-4">
             <Link
               to="/products"
-              className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:opacity-90 hover:shadow-lg hover:shadow-primary/25"
+              className="inline-flex items-center justify-center rounded-full bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground transition-all hover:opacity-90"
             >
-              Explore Our Products
+              Our Products
             </Link>
             <Link
               to="/about"
-              className="inline-flex items-center justify-center rounded-full border border-border px-8 py-3.5 text-sm font-semibold text-foreground transition-all hover:bg-muted"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors"
             >
-              Learn More
+              About us <ArrowRight />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* What We Do — Big numbers */}
+      {/* ── Products (editorial list) ─────────────────────────────────── */}
       <section className="border-t border-border">
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
-          <div className="text-center">
-            <p className="text-sm font-semibold uppercase tracking-widest text-primary">What We Do</p>
-            <h2 className="mt-4 text-3xl font-extrabold text-foreground md:text-4xl lg:text-5xl">
-              Powering the next wave of AI
-            </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-muted-foreground text-lg">
-              From foundational models to production-grade infrastructure, we build the technology stack that makes AI reliable, scalable, and accessible.
-            </p>
+        <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+          <div className="flex items-baseline justify-between pb-8">
+            <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">Products</h2>
+            <Link to="/products" className="text-xs font-semibold text-primary hover:underline">
+              View all
+            </Link>
           </div>
-          <div className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-3">
-            {[
-              { icon: "⚡", title: "AI Systems & Models", desc: "End-to-end AI systems and models designed for real-world performance, reliability, and scale." },
-              { icon: "🏗️", title: "Infrastructure", desc: "Cloud-native infrastructure purpose-built for AI workloads — from training to deployment." },
-              { icon: "🔄", title: "Intelligent Workflows", desc: "Automated pipelines and orchestration engines that transform how businesses operate." },
-            ].map((item) => (
-              <div key={item.title} className="bg-card p-10">
-                <span className="text-3xl">{item.icon}</span>
-                <h3 className="mt-5 text-lg font-bold text-foreground">{item.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.desc}</p>
-              </div>
+          <div className="divide-y divide-border">
+            {products.map((p) => (
+              <ProductRow key={p.name} {...p} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Products showcase */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
-          <p className="text-sm font-semibold uppercase tracking-widest text-primary">Products</p>
-          <h2 className="mt-4 text-3xl font-extrabold text-foreground md:text-4xl">Our flagship products</h2>
-          <div className="mt-14 grid gap-8 md:grid-cols-2">
-            <ProductShowcase
-              name="SchemaWeaver"
-              tagline="Structured Data Platform"
-              description="Design, validate, and manage structured data at enterprise scale. SchemaWeaver brings clarity and consistency to the most complex data architectures."
-              gradient="from-primary to-primary/60"
-            />
-            <ProductShowcase
-              name="FairyForge"
-              tagline="Workflow Intelligence Engine"
-              description="Build, orchestrate, and scale intelligent workflows that respond to events, process data, and leverage AI capabilities in real time."
-              gradient="from-accent to-accent/60"
-            />
-          </div>
-          <div className="mt-10 text-center">
-            <Link
-              to="/products"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
-            >
-              See all products
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Vision */}
+      {/* ── Mission ──────────────────────────────────────────────────── */}
       <section className="border-t border-border">
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
-          <div className="grid gap-16 md:grid-cols-2 md:items-center">
+        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+          <div className="grid gap-14 md:grid-cols-2 md:items-start">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-widest text-primary">Our Vision</p>
-              <h2 className="mt-4 text-3xl font-extrabold text-foreground md:text-4xl">
-                Technology that thinks ahead
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Our mission</p>
+              <h2 className="mt-5 text-3xl font-extrabold leading-tight text-foreground md:text-4xl">
+                Software that thinks with you, not around you.
               </h2>
               <p className="mt-6 text-muted-foreground leading-relaxed text-lg">
-                We believe AI should be more than a feature — it should be foundational. VivekMind is building the systems and infrastructure that make intelligent technology the default, not the exception.
+                Every VivekMind product ships with AI as a first-class citizen — not bolted on as a feature. From database migrations to content publishing, we build tools that are intelligent by default.
               </p>
               <Link
                 to="/about"
                 className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
               >
-                About VivekMind
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
+                About VivekMind <ArrowRight />
               </Link>
             </div>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 gap-x-8 gap-y-10 pt-2">
               {[
-                { value: "2+", label: "Products" },
-                { value: "AI", label: "First Approach" },
-                { value: "∞", label: "Scalability" },
+                { value: "3", label: "Products shipped" },
+                { value: "AI-first", label: "By design" },
+                { value: "55+", label: "AI tools in Schema Weaver" },
                 { value: "24/7", label: "Reliability" },
-              ].map((stat) => (
-                <div key={stat.label} className="rounded-2xl bg-surface p-7 text-center">
-                  <p className="text-3xl font-extrabold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">{stat.value}</p>
-                  <p className="mt-2 text-xs font-medium text-muted-foreground uppercase tracking-wider">{stat.label}</p>
+              ].map((s) => (
+                <div key={s.label}>
+                  <p className="text-3xl font-extrabold tracking-tight text-foreground">{s.value}</p>
+                  <p className="mt-1.5 text-sm text-muted-foreground">{s.label}</p>
                 </div>
               ))}
             </div>
@@ -149,28 +181,30 @@ function Index() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-gradient-to-r from-primary to-accent">
-        <div className="mx-auto max-w-7xl px-6 py-20 text-center lg:px-8">
-          <h2 className="text-3xl font-extrabold text-primary-foreground md:text-4xl">
-            Ready to build the future?
-          </h2>
-          <p className="mx-auto mt-5 max-w-xl text-primary-foreground/80">
-            Discover how VivekMind's AI systems and infrastructure can accelerate your next breakthrough.
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center rounded-full bg-background px-8 py-3.5 text-sm font-semibold text-foreground transition-all hover:bg-background/90"
-            >
-              Get in Touch
-            </Link>
-            <Link
-              to="/products"
-              className="inline-flex items-center justify-center rounded-full border border-primary-foreground/30 px-8 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary-foreground/10"
-            >
-              View Products
-            </Link>
+      {/* ── CTA ──────────────────────────────────────────────────────── */}
+      <section className="border-t border-border">
+        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+          <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+            <div className="max-w-lg">
+              <h2 className="text-3xl font-extrabold text-foreground md:text-4xl">Build with VivekMind.</h2>
+              <p className="mt-4 text-lg text-muted-foreground">
+                Three products. One mission: intelligent software that moves with you.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3 shrink-0">
+              <Link
+                to="/products"
+                className="inline-flex items-center justify-center rounded-full bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground transition-all hover:opacity-90"
+              >
+                Explore Products
+              </Link>
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center rounded-full border border-border px-7 py-3 text-sm font-semibold text-foreground transition-all hover:bg-muted"
+              >
+                Get in Touch
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -178,22 +212,66 @@ function Index() {
   );
 }
 
-function ProductShowcase({ name, tagline, description, gradient }: { name: string; tagline: string; description: string; gradient: string }) {
+function ProductRow({
+  index,
+  name,
+  category,
+  description,
+  href,
+  subLinks,
+}: (typeof products)[number]) {
   return (
-    <div className="group relative overflow-hidden rounded-2xl border border-border bg-card p-10 transition-all hover:shadow-xl hover:shadow-primary/5">
-      <div className={`absolute top-0 left-0 h-1 w-full bg-gradient-to-r ${gradient}`} />
-      <p className="text-xs font-semibold uppercase tracking-widest text-primary">{tagline}</p>
-      <h3 className="mt-3 text-2xl font-bold text-foreground">{name}</h3>
-      <p className="mt-4 text-muted-foreground leading-relaxed">{description}</p>
-      <Link
-        to="/products"
-        className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
-      >
-        Learn more
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-          <path d="M5 12h14M12 5l7 7-7 7" />
-        </svg>
-      </Link>
+    <div className="py-10 md:py-14">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-12 md:items-start">
+        {/* Index + Name + Category */}
+        <div className="md:col-span-4">
+          <p className="font-mono text-[11px] text-muted-foreground/40 mb-2">{index}</p>
+          <h3 className="text-2xl font-extrabold tracking-tight text-foreground">{name}</h3>
+          <span className="mt-2.5 inline-block rounded-full bg-primary/[0.08] px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary">
+            {category}
+          </span>
+        </div>
+
+        {/* Description + Sub-links */}
+        <div className="md:col-span-6">
+          <p className="text-base leading-relaxed text-muted-foreground">{description}</p>
+          {subLinks && (
+            <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2">
+              {subLinks.map(({ label, href: subHref }) => (
+                <a
+                  key={label}
+                  href={subHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                >
+                  {label}
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M7 17 17 7M7 7h10v10" />
+                  </svg>
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Explore link */}
+        <div className="md:col-span-2 md:flex md:justify-end md:pt-1">
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-foreground hover:text-primary transition-colors group"
+          >
+            Explore
+            <span className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M7 17 17 7M7 7h10v10" />
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
     </div>
   );
 }
