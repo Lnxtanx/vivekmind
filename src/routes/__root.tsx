@@ -105,6 +105,7 @@ export const Route = createRootRoute({
       { name: "author", content: "VivekMind" },
       { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
       { name: "theme-color", content: "#0f172a" },
+      { name: "msvalidate.01", content: "95BE2DE5A8DF2D7AAF00AEA9A8E300F8" },
       // Open Graph
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "VivekMind" },
