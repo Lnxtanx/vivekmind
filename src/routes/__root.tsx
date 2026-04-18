@@ -16,7 +16,7 @@ const globalStructuredData = {
       "url": SITE_URL,
       "logo": {
         "@type": "ImageObject",
-        "url": `${SITE_URL}/images/vivekmind-logo.png`,
+        "url": `${SITE_URL}/vivekmind-logo.png`,
         "width": 200,
         "height": 60,
       },
@@ -119,7 +119,7 @@ export const Route = createRootRoute({
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/images/favicon.ico" },
+      { rel: "icon", href: "/favicon.ico" },
       { rel: "sitemap", type: "application/xml", href: "/sitemap.xml" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" as const },
