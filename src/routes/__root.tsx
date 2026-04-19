@@ -109,13 +109,13 @@ export const Route = createRootRoute({
       // Open Graph
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "VivekMind" },
-      { property: "og:image", content: `${SITE_URL}/vivekmind_og_image.png` },
+      { property: "og:image", content: `${SITE_URL}/vivekmind-logo.png` },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       // Twitter Card
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@vivekmind" },
-      { name: "twitter:image", content: `${SITE_URL}/vivekmind_og_image.png` },
+      { name: "twitter:image", content: `${SITE_URL}/vivekmind-logo.png` },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
