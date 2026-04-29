@@ -35,6 +35,12 @@ const globalStructuredData = {
           "url": "https://schemaweaver.vivekmind.com",
           "applicationCategory": "DeveloperApplication",
           "description": "PostgreSQL schema management platform with visual SQL Editor, auto-generated ER diagrams, migration engine with drift detection, and AI-powered Data Explorer.",
+          "offers": {
+            "@type": "Offer",
+            "url": "https://schemaweaver.vivekmind.com/pricing",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
         },
         {
           "@type": "SoftwareApplication",

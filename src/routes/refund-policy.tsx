@@ -85,7 +85,7 @@ function RefundPolicyPage() {
           <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
             If you have any questions on how to request a refund, please contact us at:
             <br />
-            <strong className="text-foreground">vivekvenom138@gmail.com</strong>
+            <strong className="text-foreground">support@vivekmind.com</strong>
           </p>
         </section>
       </div>

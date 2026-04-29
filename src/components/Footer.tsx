@@ -6,6 +6,7 @@ const PRODUCT_URLS = {
   sqlEditor: "https://sql-editor.schemaweaver.vivekmind.com",
   dataExplorer: "https://data-explorer.schemaweaver.vivekmind.com",
   swDocs: "https://docs.schemaweaver.vivekmind.com",
+  pricing: "https://schemaweaver.vivekmind.com/pricing",
   fairyForge: "https://fairyforge.vivekmind.com",
   press: "https://press.vivekmind.com",
 };
@@ -62,6 +63,14 @@ export function Footer() {
                 className="text-sm opacity-60 hover:opacity-100 transition-opacity"
               >
                 Docs
+              </a>
+              <a
+                href={PRODUCT_URLS.pricing}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm opacity-60 hover:opacity-100 transition-opacity"
+              >
+                Pricing
               </a>
             </div>
           </div>
