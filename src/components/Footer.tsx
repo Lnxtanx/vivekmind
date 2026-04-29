@@ -106,6 +106,8 @@ export function Footer() {
             <div className="mt-4 flex flex-col gap-2.5">
               <Link to="/privacy" className="text-sm opacity-70 hover:opacity-100 transition-opacity">Privacy Policy</Link>
               <Link to="/terms" className="text-sm opacity-70 hover:opacity-100 transition-opacity">Terms of Service</Link>
+              <Link to="/refund-policy" className="text-sm opacity-70 hover:opacity-100 transition-opacity">Refund Policy</Link>
+              <Link to="/cancellation-policy" className="text-sm opacity-70 hover:opacity-100 transition-opacity">Cancellation Policy</Link>
             </div>
           </div>
 
