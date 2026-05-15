@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { fetchLatestPosts, subscribeToNewsletter, type BlogPost } from "@/lib/api/blog";
 
 const PRODUCT_URLS = {
   schemaWeaver: "https://schemaweaver.vivekmind.com",
@@ -66,6 +67,10 @@ export const Route = createFileRoute("/")({
     ],
     links: [{ rel: "canonical", href: "https://vivekmind.com/" }],
   }),
+  loader: async () => {
+    const latestPosts = await fetchLatestPosts(3);
+    return { latestPosts };
+  },
   component: Index,
 });
 
@@ -181,6 +186,9 @@ function Index() {
         </div>
       </section>
 
+      {/* ── Latest from Blog ───────────────────────────────────────────── */}
+      <LatestPostsSection />
+
       {/* ── CTA ──────────────────────────────────────────────────────── */}
       <section className="border-t border-border">
         <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
@@ -273,5 +281,70 @@ function ProductRow({
         </div>
       </div>
     </div>
+  );
+}
+
+function LatestPostsSection() {
+  const { latestPosts } = Route.useLoaderData();
+
+  if (!latestPosts || latestPosts.length === 0) {
+    return null;
+  }
+
+  return (
+    <section className="border-t border-border">
+      <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+        <div className="flex items-baseline justify-between pb-8">
+          <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            From the Blog
+          </h2>
+          <Link to="/blog" className="text-xs font-semibold text-primary hover:underline">
+            View all →
+          </Link>
+        </div>
+
+        <div className="grid gap-8 md:grid-cols-3">
+          {latestPosts.map((post: BlogPost) => (
+            <article key={post.id} className="group">
+              <Link to="/blog/$slug" params={{ slug: post.slug }}>
+                {post.thumbnail_url && (
+                  <div className="aspect-video overflow-hidden rounded-xl">
+                    <img
+                      src={post.thumbnail_url}
+                      alt={post.title}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform group-hover:scale-105"
+                    />
+                  </div>
+                )}
+                <div className="mt-5">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-primary">
+                      {post.category}
+                    </span>
+                    {post.published_at && (
+                      <span className="text-xs text-muted-foreground">
+                        {new Date(post.published_at).toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                        })}
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors line-clamp-2">
+                    {post.title}
+                  </h3>
+                  {post.excerpt && (
+                    <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
+                      {post.excerpt}
+                    </p>
+                  )}
+                </div>
+              </Link>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }

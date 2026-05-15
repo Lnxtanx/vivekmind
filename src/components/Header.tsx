@@ -61,6 +61,7 @@ export function Header() {
 function NavLinks({ onClick }: { onClick?: () => void }) {
   const links = [
     { to: "/products" as const, label: "Products" },
+    { to: "/blog" as const, label: "Blog" },
     { to: "/about" as const, label: "About" },
     { to: "/support" as const, label: "Support" },
   ];
