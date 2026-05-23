@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { fetchLatestPosts, subscribeToNewsletter, type BlogPost } from "@/lib/api/blog";
+import logo from "../assets/vivekmind-logo.png";
 
 const PRODUCT_URLS = {
   schemaWeaver: "https://schemaweaver.vivekmind.com",
@@ -106,12 +107,12 @@ function Index() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.04] to-transparent pointer-events-none" />
         <div className="relative mx-auto max-w-7xl px-6 pt-20 pb-20 md:pt-36 md:pb-28 lg:px-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-8">VivekMind</p>
+          <div className="flex items-center gap-2.5 mb-8">
+            <img src={logo} alt="VivekMind Logo" className="hidden md:block h-5 w-auto" />
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">VivekMind</p>
+          </div>
           <h1 className="max-w-3xl text-5xl font-extrabold leading-[1.06] tracking-tight text-foreground md:text-6xl lg:text-[5.25rem]">
-            AI systems,{" "}
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              tools &amp; infrastructure.
-            </span>
+            AI systems, tools &amp; infrastructure.
           </h1>
           <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
             We design and build intelligent products for developers, data teams, and technical organisations — software that thinks alongside you.

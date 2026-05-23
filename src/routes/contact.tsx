@@ -29,8 +29,12 @@ export const Route = createFileRoute("/contact")({
   component: ContactPage,
 });
 
+const API_BASE = "https://api-node.schemaweaver.vivekmind.com";
+
 function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   return (
     <div>
@@ -56,9 +60,39 @@ function ContactPage() {
               </div>
             ) : (
               <form
-                onSubmit={(e) => {
+                onSubmit={async (e) => {
                   e.preventDefault();
-                  setSubmitted(true);
+                  setSubmitting(true);
+                  setErrorMsg("");
+
+                  const formData = new FormData(e.currentTarget);
+                  const name = formData.get("name") as string;
+                  const email = formData.get("email") as string;
+                  const subject = formData.get("subject") as string;
+                  const message = formData.get("message") as string;
+
+                  try {
+                    const response = await fetch(`${API_BASE}/api/email/contact`, {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({ name, email, subject, message }),
+                    });
+
+                    const data = await response.json();
+
+                    if (!response.ok) {
+                      throw new Error(data.error || "Failed to send message");
+                    }
+
+                    setSubmitted(true);
+                  } catch (err: any) {
+                    console.error("Contact form error:", err);
+                    setErrorMsg(err.message || "Failed to send message. Please try again later.");
+                  } finally {
+                    setSubmitting(false);
+                  }
                 }}
                 className="space-y-6"
               >
@@ -127,10 +161,15 @@ function ContactPage() {
                 </div>
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-3 text-sm font-semibold text-primary-foreground transition-all hover:opacity-90"
+                  disabled={submitting}
+                  className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-3 text-sm font-semibold text-primary-foreground transition-all hover:opacity-90 disabled:opacity-50"
                 >
-                  Send Message
+                  {submitting ? "Sending..." : "Send Message"}
                 </button>
+
+                {errorMsg && (
+                  <p className="text-sm font-semibold text-destructive mt-4">{errorMsg}</p>
+                )}
               </form>
             )}
           </div>
