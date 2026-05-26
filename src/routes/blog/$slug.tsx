@@ -195,6 +195,59 @@ function BlogPostPage() {
     };
   }, [post]);
 
+  // Render Mermaid diagrams in blog content (lazy-loaded from CDN)
+  useEffect(() => {
+    if (!contentRef.current) return;
+
+    const mermaidBlocks = contentRef.current.querySelectorAll<HTMLElement>(
+      "pre.mermaid, div.mermaid"
+    );
+    if (mermaidBlocks.length === 0) return;
+
+    let cancelled = false;
+
+    (async () => {
+      // Lazy-load Mermaid.js from CDN only when diagrams exist
+      if (!(window as any).mermaid) {
+        await new Promise<void>((resolve, reject) => {
+          const script = document.createElement("script");
+          script.src = "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js";
+          script.async = true;
+          script.onload = () => resolve();
+          script.onerror = () => reject(new Error("Failed to load Mermaid.js"));
+          document.head.appendChild(script);
+        });
+      }
+
+      if (cancelled) return;
+
+      const mermaid = (window as any).mermaid;
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: "default",
+        fontFamily: "Geist, Inter, system-ui, sans-serif",
+        securityLevel: "loose",
+      });
+
+      // Reset previously rendered diagrams (handles SPA re-navigation)
+      mermaidBlocks.forEach((block) => {
+        if (block.getAttribute("data-processed")) {
+          block.removeAttribute("data-processed");
+          const original = block.getAttribute("data-mermaid-source");
+          if (original) block.textContent = original;
+        } else {
+          block.setAttribute("data-mermaid-source", block.textContent || "");
+        }
+      });
+
+      await mermaid.run({ nodes: Array.from(mermaidBlocks) });
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [post]);
+
   const handleCopyLink = useCallback(() => {
     if (!post) return;
     navigator.clipboard.writeText(`${SITE_URL}/blog/${post.slug}`);

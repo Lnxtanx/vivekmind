@@ -475,3 +475,33 @@
   box-shadow: 0 8px 30px -8px color-mix(in oklch, var(--primary) 15%, transparent);
   transform: translateY(-1px);
 }
+
+/* ── Mermaid diagram blocks ─────────────────────────────────────── */
+/* Override code-block styles for Mermaid — diagrams are NOT code   */
+.blog-content pre.mermaid,
+.blog-content div.mermaid {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  overflow-x: auto;
+  color: var(--foreground);
+  text-align: center;
+}
+
+.blog-content pre.mermaid code,
+.blog-content div.mermaid code {
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Responsive SVG diagrams */
+.blog-content .mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
