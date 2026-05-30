@@ -1,8 +1,66 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { fetchBlogPost, fetchLatestPosts, type BlogPost } from "@/lib/api/blog";
 import { useState, useEffect, useCallback, useRef } from "react";
+import { BlogPostLikes } from "@/components/BlogPostLikes";
+import { CommentList } from "@/components/BlogComments";
 
 const SITE_URL = "https://vivekmind.com";
+
+/* ── Loading Skeleton Component ─────────────────────────────────── */
+function BlogPostLoading() {
+  return (
+    <div className="animate-in fade-in duration-500">
+      <header className="mx-auto max-w-4xl px-6 pt-20 pb-10 lg:px-8">
+        <div className="flex items-center gap-2 text-xs text-muted-foreground mb-8">
+          <div className="h-4 w-16 rounded bg-muted" />
+          <div className="h-4 w-4 rounded bg-muted" />
+          <div className="h-4 w-20 rounded bg-muted" />
+          <div className="h-4 w-4 rounded bg-muted" />
+          <div className="h-4 w-24 rounded bg-muted" />
+        </div>
+        <div className="flex flex-wrap items-center gap-3 mb-6">
+          <div className="h-5 w-24 rounded-full bg-muted" />
+          <div className="h-4 w-32 rounded bg-muted" />
+          <div className="h-4 w-4 rounded bg-muted" />
+          <div className="h-4 w-20 rounded bg-muted" />
+        </div>
+        <div className="h-12 w-3/4 rounded bg-muted mb-6" />
+        <div className="h-6 w-1/2 rounded bg-muted mb-8" />
+        <div className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-3">
+            <div className="h-11 w-11 rounded-full bg-muted" />
+            <div>
+              <div className="h-4 w-40 rounded bg-muted mb-2" />
+              <div className="h-3 w-16 rounded bg-muted" />
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="h-9 w-9 rounded-lg bg-muted" />
+            <div className="h-9 w-9 rounded-lg bg-muted" />
+            <div className="h-9 w-24 rounded-lg bg-muted" />
+          </div>
+        </div>
+      </header>
+      <div className="mx-auto max-w-5xl px-6 lg:px-8">
+        <div className="aspect-video rounded-2xl bg-muted mb-8" />
+      </div>
+      <div className="mx-auto max-w-3xl px-6 py-12 lg:px-8">
+        <div className="space-y-4">
+          <div className="h-6 w-full rounded bg-muted" />
+          <div className="h-4 w-11/12 rounded bg-muted" />
+          <div className="h-4 w-10/12 rounded bg-muted" />
+          <div className="h-4 w-9/12 rounded bg-muted" />
+          <div className="h-6 w-3/4 rounded bg-muted mt-8" />
+          <div className="h-4 w-full rounded bg-muted" />
+          <div className="h-4 w-11/12 rounded bg-muted" />
+          <div className="h-6 w-5/6 rounded bg-muted mt-8" />
+          <div className="h-4 w-8/12 rounded bg-muted" />
+          <div className="h-4 w-full rounded bg-muted" />
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export const Route = createFileRoute("/blog/$slug")({
   head: ({ loaderData }: any) => {
@@ -93,6 +151,8 @@ function ImageLightbox({ src, alt, onClose }: { src: string; alt: string; onClos
   );
 }
 
+
+
 /* ── Share button component ─────────────────────────────────────── */
 function ShareButton({ href, label, icon, onClick }: { href?: string; label: string; icon: React.ReactNode; onClick?: () => void }) {
   if (onClick) {
@@ -168,7 +228,7 @@ const icons = {
 
 /* ── Main page ──────────────────────────────────────────────────── */
 function BlogPostPage() {
-  const { post, relatedPosts } = Route.useLoaderData();
+  const { post, relatedPosts: loaderRelatedPosts } = Route.useLoaderData();
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
   const [lightboxAlt, setLightboxAlt] = useState("");
   const [copied, setCopied] = useState(false);
@@ -286,7 +346,7 @@ function BlogPostPage() {
   const encodedTitle = encodeURIComponent(post.title);
 
   // Filter out current post from related
-  const filteredRelated = relatedPosts.filter((p: BlogPost) => p.id !== post.id).slice(0, 3);
+  const filteredRelated = (loaderRelatedPosts || []).filter((p: BlogPost) => p.id !== post.id).slice(0, 3);
 
   return (
     <div>
@@ -298,6 +358,8 @@ function BlogPostPage() {
           onClose={() => setLightboxSrc(null)}
         />
       )}
+
+
 
       {/* JSON-LD Structured Data */}
       <script
@@ -380,6 +442,7 @@ function BlogPostPage() {
 
             {/* Top share actions */}
             <div className="flex items-center gap-2">
+              <BlogPostLikes slug={post.slug} />
               <ShareButton
                 href={`https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`}
                 label="X"
@@ -442,6 +505,11 @@ function BlogPostPage() {
             </div>
           </div>
         )}
+
+        {/* ── Comments Section ────────────────────────────────────── */}
+        <div className="mx-auto max-w-3xl px-6 py-8 lg:px-8 border-t border-border mt-8">
+          <CommentList slug={post.slug} />
+        </div>
       </article>
 
       {/* ── Share Section ───────────────────────────────────────────── */}

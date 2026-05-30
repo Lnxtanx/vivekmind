@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { fetchLatestPosts, subscribeToNewsletter, type BlogPost } from "@/lib/api/blog";
+import { fetchBlogPosts, subscribeToNewsletter, type BlogPost } from "@/lib/api/blog";
 import logo from "../assets/vivekmind-logo.png";
+import { useState, useRef, useEffect, useCallback } from "react";
 
 const PRODUCT_URLS = {
   schemaWeaver: "https://schemaweaver.vivekmind.com",
@@ -69,8 +70,8 @@ export const Route = createFileRoute("/")({
     links: [{ rel: "canonical", href: "https://vivekmind.com/" }],
   }),
   loader: async () => {
-    const latestPosts = await fetchLatestPosts(3);
-    return { latestPosts };
+    const postsData = await fetchBlogPosts(1, 6);
+    return { latestPosts: postsData.posts, pagination: postsData.pagination };
   },
   component: Index,
 });
@@ -287,65 +288,227 @@ function ProductRow({
 
 function LatestPostsSection() {
   const { latestPosts } = Route.useLoaderData();
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const [dragMoved, setDragMoved] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   if (!latestPosts || latestPosts.length === 0) {
     return null;
   }
 
+  const updateScrollState = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 4);
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 4);
+
+    // Calculate active index based on scroll position
+    const cardWidth = el.scrollWidth / latestPosts.length;
+    const idx = Math.round(el.scrollLeft / cardWidth);
+    setActiveIndex(Math.min(idx, latestPosts.length - 1));
+  }, [latestPosts.length]);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    updateScrollState();
+    el.addEventListener("scroll", updateScrollState, { passive: true });
+    window.addEventListener("resize", updateScrollState);
+    return () => {
+      el.removeEventListener("scroll", updateScrollState);
+      window.removeEventListener("resize", updateScrollState);
+    };
+  }, [updateScrollState]);
+
+  const scrollBy = (direction: "left" | "right") => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const cardWidth = el.querySelector<HTMLElement>("[data-blog-card]")?.offsetWidth || 360;
+    const gap = 24;
+    el.scrollBy({
+      left: direction === "left" ? -(cardWidth + gap) : cardWidth + gap,
+      behavior: "smooth",
+    });
+  };
+
+  // Mouse drag handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setIsDragging(true);
+    setDragMoved(false);
+    setStartX(e.pageX - el.offsetLeft);
+    setScrollLeft(el.scrollLeft);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    const el = scrollRef.current;
+    if (!el) return;
+    e.preventDefault();
+    const x = e.pageX - el.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    if (Math.abs(walk) > 5) setDragMoved(true);
+    el.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseLeave = () => {
+    setIsDragging(false);
+  };
+
+  // Prevent link clicks if we were dragging
+  const handleCardClick = (e: React.MouseEvent) => {
+    if (dragMoved) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  };
+
   return (
     <section className="border-t border-border">
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-        <div className="flex items-baseline justify-between pb-8">
+        {/* Header with navigation arrows */}
+        <div className="flex items-center justify-between pb-8">
           <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
             From the Blog
           </h2>
-          <Link to="/blog" className="text-xs font-semibold text-primary hover:underline">
-            View all →
-          </Link>
+          <div className="flex items-center gap-3">
+            {/* Arrow buttons */}
+            <div className="flex items-center gap-1.5">
+              <button
+                onClick={() => scrollBy("left")}
+                disabled={!canScrollLeft}
+                className="group flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-muted-foreground transition-all hover:bg-primary hover:text-primary-foreground hover:border-primary disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-card disabled:hover:text-muted-foreground disabled:hover:border-border"
+                aria-label="Previous posts"
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M19 12H5M12 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button
+                onClick={() => scrollBy("right")}
+                disabled={!canScrollRight}
+                className="group flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-muted-foreground transition-all hover:bg-primary hover:text-primary-foreground hover:border-primary disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-card disabled:hover:text-muted-foreground disabled:hover:border-border"
+                aria-label="Next posts"
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+            <div className="h-5 w-px bg-border" />
+            <Link to="/blog" className="text-xs font-semibold text-primary hover:underline">
+              View all →
+            </Link>
+          </div>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-3">
+        {/* Scrollable cards container */}
+        <div
+          ref={scrollRef}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseLeave}
+          className={`flex gap-6 overflow-x-auto scroll-smooth pb-4 -mb-4 select-none ${
+            isDragging ? "cursor-grabbing" : "cursor-grab"
+          }`}
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            WebkitOverflowScrolling: "touch",
+          }}
+        >
+          {/* Hide scrollbar with inline style for Webkit */}
+          <style>{`
+            .blog-scroll-container::-webkit-scrollbar { display: none; }
+          `}</style>
           {latestPosts.map((post: BlogPost) => (
-            <article key={post.id} className="group">
-              <Link to="/blog/$slug" params={{ slug: post.slug }}>
-                {post.thumbnail_url && (
-                  <div className="aspect-video overflow-hidden rounded-xl">
-                    <img
-                      src={post.thumbnail_url}
-                      alt={post.title}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition-transform group-hover:scale-105"
-                    />
-                  </div>
-                )}
-                <div className="mt-5">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="text-[11px] font-semibold uppercase tracking-wider text-primary">
-                      {post.category}
-                    </span>
-                    {post.published_at && (
-                      <span className="text-xs text-muted-foreground">
-                        {new Date(post.published_at).toLocaleDateString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                        })}
+            <div
+              key={post.id}
+              data-blog-card
+              className="min-w-[300px] max-w-[380px] flex-shrink-0 md:min-w-[340px] lg:min-w-[calc(33.333%-16px)]"
+            >
+              <article className="group h-full">
+                <Link
+                  to="/blog/$slug"
+                  params={{ slug: post.slug }}
+                  onClick={handleCardClick}
+                  draggable={false}
+                >
+                  {post.thumbnail_url && (
+                    <div className="aspect-video overflow-hidden rounded-xl">
+                      <img
+                        src={post.thumbnail_url}
+                        alt={post.title}
+                        loading="lazy"
+                        draggable={false}
+                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    </div>
+                  )}
+                  <div className="mt-5">
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="text-[11px] font-semibold uppercase tracking-wider text-primary">
+                        {post.category}
                       </span>
+                      {post.published_at && (
+                        <span className="text-xs text-muted-foreground">
+                          {new Date(post.published_at).toLocaleDateString("en-US", {
+                            month: "short",
+                            day: "numeric",
+                          })}
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors line-clamp-2">
+                      {post.title}
+                    </h3>
+                    {post.excerpt && (
+                      <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
+                        {post.excerpt}
+                      </p>
                     )}
                   </div>
-                  <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors line-clamp-2">
-                    {post.title}
-                  </h3>
-                  {post.excerpt && (
-                    <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
-                      {post.excerpt}
-                    </p>
-                  )}
-                </div>
-              </Link>
-            </article>
+                </Link>
+              </article>
+            </div>
           ))}
         </div>
+
+        {/* Dot indicators */}
+        {latestPosts.length > 1 && (
+          <div className="flex items-center justify-center gap-1.5 mt-6">
+            {latestPosts.map((_: BlogPost, idx: number) => (
+              <button
+                key={idx}
+                onClick={() => {
+                  const el = scrollRef.current;
+                  if (!el) return;
+                  const cardWidth = el.scrollWidth / latestPosts.length;
+                  el.scrollTo({ left: cardWidth * idx, behavior: "smooth" });
+                }}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  idx === activeIndex
+                    ? "w-6 bg-primary"
+                    : "w-1.5 bg-muted-foreground/20 hover:bg-muted-foreground/40"
+                }`}
+                aria-label={`Go to post ${idx + 1}`}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
 }
+

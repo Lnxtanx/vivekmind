@@ -21,6 +21,8 @@ export interface BlogPost {
   category: string;
   tags: string[];
   view_count: number;
+  comment_count: number;
+  like_count: number;
   created_at: string;
   updated_at: string;
   media?: BlogMedia[];
@@ -35,6 +37,22 @@ export interface BlogMedia {
   embed_provider: string | null;
   alt_text: string | null;
   sort_order: number;
+}
+
+export interface BlogComment {
+  id: string;
+  post_id: string;
+  parent_id: string | null;
+  author_name: string;
+  author_email: string | null;
+  content: string;
+  is_blocked: boolean;
+  is_deleted: boolean;
+  likes_count: number;
+  user_liked?: boolean;
+  created_at: string;
+  updated_at: string;
+  replies?: BlogComment[];
 }
 
 export interface PaginatedResponse<T> {
@@ -161,4 +179,109 @@ export async function subscribeToNewsletter(email: string): Promise<{
     message: data.message || data.error,
     alreadySubscribed: data.alreadySubscribed,
   };
+}
+
+// =============================================================================
+// Blog Likes & Comments API Functions
+// =============================================================================
+
+/**
+ * Get post likes count
+ */
+export async function getPostLikeCount(slug: string): Promise<{
+  post_id: string;
+  like_count: number;
+  slug: string;
+}> {
+  const response = await fetch(`${API_BASE}/api/blog/${slug}/likes`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch likes');
+  }
+  return await response.json();
+}
+
+/**
+ * Toggle like on a post
+ */
+export async function togglePostLike(slug: string): Promise<{
+  success: boolean;
+  post_id: string;
+  like_count: number;
+}> {
+  const response = await fetch(`${API_BASE}/api/blog/${slug}/like`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  if (!response.ok) {
+    throw new Error('Failed to toggle like');
+  }
+  return await response.json();
+}
+
+/**
+ * Get comments for a post
+ */
+export async function getPostComments(slug: string, page: number = 1, limit: number = 20): Promise<{
+  comments: BlogComment[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+  };
+}> {
+  const params = new URLSearchParams({ page: String(page), limit: String(limit) });
+  const response = await fetch(`${API_BASE}/api/blog/${slug}/comments?${params}`, {
+    next: { revalidate: 60 }, // Cache for 1 minute
+  } as any);
+  if (!response.ok) {
+    throw new Error('Failed to fetch comments');
+  }
+  return await response.json();
+}
+
+/**
+ * Add a comment to a post
+ */
+export async function addPostComment(
+  slug: string,
+  { author_name, author_email, content, parent_id }: { author_name: string; author_email?: string; content: string; parent_id?: string }
+): Promise<{
+  comment: BlogComment;
+  message: string;
+}> {
+  const response = await fetch(`${API_BASE}/api/blog/${slug}/comments`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ author_name, author_email, content, parent_id }),
+  });
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.error || 'Failed to add comment');
+  }
+  return await response.json();
+}
+
+/**
+ * Toggle like on a comment
+ */
+export async function toggleCommentLike(commentId: string): Promise<{
+  success: boolean;
+  comment_id: string;
+  like_count: number;
+}> {
+  const response = await fetch(`${API_BASE}/api/blog/comments/${commentId}/like`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  if (!response.ok) {
+    throw new Error('Failed to toggle comment like');
+  }
+  return await response.json();
 }
