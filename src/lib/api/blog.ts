@@ -3,6 +3,8 @@
  * Fetches blog posts from the backend API
  */
 
+import { getReaderId } from './analytics';
+
 const API_BASE = 'https://api-node.schemaweaver.vivekmind.com';
 
 export interface BlogPost {
@@ -192,8 +194,14 @@ export async function getPostLikeCount(slug: string): Promise<{
   post_id: string;
   like_count: number;
   slug: string;
+  user_liked: boolean;
 }> {
-  const response = await fetch(`${API_BASE}/api/blog/${slug}/likes`);
+  const readerId = getReaderId();
+  const response = await fetch(`${API_BASE}/api/blog/${slug}/likes`, {
+    headers: {
+      'x-reader-id': readerId,
+    },
+  });
   if (!response.ok) {
     throw new Error('Failed to fetch likes');
   }
@@ -208,10 +216,12 @@ export async function togglePostLike(slug: string): Promise<{
   post_id: string;
   like_count: number;
 }> {
+  const readerId = getReaderId();
   const response = await fetch(`${API_BASE}/api/blog/${slug}/like`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'x-reader-id': readerId,
     },
   });
   if (!response.ok) {
@@ -233,7 +243,11 @@ export async function getPostComments(slug: string, page: number = 1, limit: num
   };
 }> {
   const params = new URLSearchParams({ page: String(page), limit: String(limit) });
+  const readerId = getReaderId();
   const response = await fetch(`${API_BASE}/api/blog/${slug}/comments?${params}`, {
+    headers: {
+      'x-reader-id': readerId,
+    },
     next: { revalidate: 60 }, // Cache for 1 minute
   } as any);
   if (!response.ok) {
@@ -284,4 +298,57 @@ export async function toggleCommentLike(commentId: string): Promise<{
     throw new Error('Failed to toggle comment like');
   }
   return await response.json();
+}
+
+/**
+ * Record a unique blog post view
+ */
+export async function recordPostView(slug: string, postId: string, readerId: string): Promise<{ success: boolean; unique: boolean }> {
+  try {
+    const response = await fetch(`${API_BASE}/api/blog/${slug}/view`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ post_id: postId, reader_id: readerId }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to record view');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Failed to record post view:', error);
+    return { success: false, unique: false };
+  }
+}
+
+/**
+ * Send reading-time heartbeat for a post
+ */
+export async function sendPostHeartbeat(
+  slug: string,
+  payload: {
+    post_id: string;
+    reader_id: string;
+    session_id: string;
+    time_spent_seconds: number;
+    scroll_depth: number;
+  }
+): Promise<boolean> {
+  try {
+    const response = await fetch(`${API_BASE}/api/blog/${slug}/heartbeat`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    return response.ok;
+  } catch (error) {
+    console.error('Failed to send heartbeat:', error);
+    return false;
+  }
 }

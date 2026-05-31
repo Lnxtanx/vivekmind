@@ -21,9 +21,13 @@ export function BlogPostLikes({ slug, initialCount = 0 }: BlogPostLikesProps) {
         const data = await getPostLikeCount(slug);
         if (cancelled) return;
         const serverCount = data.like_count || 0;
-        const liked = localStorage.getItem(`blog_liked_${slug}`) === 'true';
+        const liked = (data as any).user_liked !== undefined
+          ? (data as any).user_liked
+          : localStorage.getItem(`blog_liked_${slug}`) === 'true';
+        
         setUserLiked(liked);
-        setLikeCount(liked ? serverCount + 1 : serverCount);
+        setLikeCount(serverCount);
+        localStorage.setItem(`blog_liked_${slug}`, liked.toString());
       } catch {
         const liked = localStorage.getItem(`blog_liked_${slug}`) === 'true';
         setUserLiked(liked);

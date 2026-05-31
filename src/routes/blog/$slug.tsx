@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { fetchBlogPost, fetchLatestPosts, type BlogPost } from "@/lib/api/blog";
+import { fetchBlogPost, fetchLatestPosts, type BlogPost, recordPostView, sendPostHeartbeat } from "@/lib/api/blog";
 import { useState, useEffect, useCallback, useRef } from "react";
 import { BlogPostLikes } from "@/components/BlogPostLikes";
 import { CommentList } from "@/components/BlogComments";
+import { getOrCreateAnalyticsIdentity } from "@/lib/api/analytics";
 
 const SITE_URL = "https://vivekmind.com";
 
@@ -226,6 +227,117 @@ const icons = {
   ),
 };
 
+/* ── Active Guest Analytics & Heartbeat Hook ────────────────────── */
+function useReadAnalytics(slug: string, postId: string) {
+  useEffect(() => {
+    if (!postId) return;
+
+    const { readerId, sessionId } = getOrCreateAnalyticsIdentity();
+
+    // 1. UNIQUE VIEW TRACKING
+    const recordUniqueView = async () => {
+      const viewedKey = "vm_viewed_posts";
+      const viewed = JSON.parse(localStorage.getItem(viewedKey) || "{}");
+      const now = Date.now();
+      const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+
+      if (viewed[slug] && (now - viewed[slug]) < ONE_DAY_MS) {
+        return; // Viewed recently, skip API call
+      }
+
+      const res = await recordPostView(slug, postId, readerId);
+      if (res && res.success) {
+        viewed[slug] = now;
+        localStorage.setItem(viewedKey, JSON.stringify(viewed));
+      }
+    };
+
+    recordUniqueView();
+
+    // 2. ACTIVE HEARTBEAT TRACKING
+    let activeSeconds = 0;
+    let maxScrollPercent = 0;
+    let lastActivityTime = Date.now();
+    let intervalId: NodeJS.Timeout | null = null;
+
+    // Track scroll depth
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? Math.round((scrollTop / docHeight) * 100) : 0;
+      if (pct > maxScrollPercent) {
+        maxScrollPercent = Math.min(100, pct);
+      }
+      lastActivityTime = Date.now(); // Reset idle on scroll
+    };
+
+    // Reset idle on mouse/key activity
+    const handleActivity = () => {
+      lastActivityTime = Date.now();
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("mousemove", handleActivity, { passive: true });
+    window.addEventListener("keydown", handleActivity, { passive: true });
+
+    // Send heartbeat
+    const triggerHeartbeat = async (secondsToSend: number) => {
+      await sendPostHeartbeat(slug, {
+        post_id: postId,
+        reader_id: readerId,
+        session_id: sessionId,
+        time_spent_seconds: secondsToSend,
+        scroll_depth: maxScrollPercent
+      });
+    };
+
+    // Every 10s check active reading duration
+    intervalId = setInterval(() => {
+      const now = Date.now();
+      const isVisible = document.visibilityState === "visible";
+      const isIdle = (now - lastActivityTime) > 30000; // 30s idle threshold
+
+      if (isVisible && !isIdle) {
+        activeSeconds += 10;
+        if (activeSeconds % 30 === 0) {
+          triggerHeartbeat(30);
+        }
+      }
+    }, 10000);
+
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("mousemove", handleActivity);
+      window.removeEventListener("keydown", handleActivity);
+
+      // Send final remaining seconds on page leave
+      const finalSeconds = activeSeconds % 30;
+      if (finalSeconds > 0) {
+        const payload = JSON.stringify({
+          post_id: postId,
+          reader_id: readerId,
+          session_id: sessionId,
+          time_spent_seconds: finalSeconds,
+          scroll_depth: maxScrollPercent
+        });
+        
+        const endpoint = `https://api-node.schemaweaver.vivekmind.com/api/blog/${slug}/heartbeat`;
+        if (navigator.sendBeacon) {
+          navigator.sendBeacon(endpoint, new Blob([payload], { type: "application/json" }));
+        } else {
+          fetch(endpoint, {
+            method: "POST",
+            keepalive: true,
+            headers: { "Content-Type": "application/json" },
+            body: payload
+          }).catch(() => {});
+        }
+      }
+    };
+  }, [slug, postId]);
+}
+
 /* ── Main page ──────────────────────────────────────────────────── */
 function BlogPostPage() {
   const { post, relatedPosts: loaderRelatedPosts } = Route.useLoaderData();
@@ -233,6 +345,9 @@ function BlogPostPage() {
   const [lightboxAlt, setLightboxAlt] = useState("");
   const [copied, setCopied] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
+
+  // Track unauthenticated unique views & active reading-time heartbeats
+  useReadAnalytics(post?.slug || "", post?.id || "");
 
   // Attach click handlers to images inside blog content for lightbox
   useEffect(() => {
