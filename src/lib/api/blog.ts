@@ -352,3 +352,23 @@ export async function sendPostHeartbeat(
     return false;
   }
 }
+
+/**
+ * Record a blog post share click
+ */
+export async function recordPostShare(slug: string, platform: string, readerId?: string): Promise<boolean> {
+  try {
+    const response = await fetch(`${API_BASE}/api/blog/${slug}/share`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ platform, reader_id: readerId || getReaderId() }),
+    });
+
+    return response.ok;
+  } catch (error) {
+    console.error('Failed to record share:', error);
+    return false;
+  }
+}

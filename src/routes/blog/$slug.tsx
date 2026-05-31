@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { fetchBlogPost, fetchLatestPosts, type BlogPost, recordPostView, sendPostHeartbeat } from "@/lib/api/blog";
+import { fetchBlogPost, fetchLatestPosts, type BlogPost, recordPostView, sendPostHeartbeat, recordPostShare } from "@/lib/api/blog";
 import { useState, useEffect, useCallback, useRef } from "react";
 import { BlogPostLikes } from "@/components/BlogPostLikes";
 import { CommentList } from "@/components/BlogComments";
@@ -155,30 +155,31 @@ function ImageLightbox({ src, alt, onClose }: { src: string; alt: string; onClos
 
 
 /* ── Share button component ─────────────────────────────────────── */
-function ShareButton({ href, label, icon, onClick }: { href?: string; label: string; icon: React.ReactNode; onClick?: () => void }) {
-  if (onClick) {
+function ShareButton({ href, label, icon, onClick }: { href?: string; label: string; icon: React.ReactNode; onClick?: (e: React.MouseEvent) => void }) {
+  if (href) {
     return (
-      <button
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
         onClick={onClick}
         className="group flex items-center gap-2 rounded-lg border border-border bg-card px-3.5 py-2 text-xs font-medium text-muted-foreground hover:text-foreground hover:border-primary/30 transition-all"
         aria-label={label}
       >
         {icon}
         <span className="hidden sm:inline">{label}</span>
-      </button>
+      </a>
     );
   }
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
+    <button
+      onClick={onClick}
       className="group flex items-center gap-2 rounded-lg border border-border bg-card px-3.5 py-2 text-xs font-medium text-muted-foreground hover:text-foreground hover:border-primary/30 transition-all"
       aria-label={label}
     >
       {icon}
       <span className="hidden sm:inline">{label}</span>
-    </a>
+    </button>
   );
 }
 
@@ -423,10 +424,16 @@ function BlogPostPage() {
     };
   }, [post]);
 
+  const handleShareClick = useCallback((platform: string) => {
+    if (!post) return;
+    recordPostShare(post.slug, platform);
+  }, [post]);
+
   const handleCopyLink = useCallback(() => {
     if (!post) return;
     navigator.clipboard.writeText(`${SITE_URL}/blog/${post.slug}`);
     setCopied(true);
+    recordPostShare(post.slug, "copy_link");
     setTimeout(() => setCopied(false), 2000);
   }, [post]);
 
@@ -562,11 +569,13 @@ function BlogPostPage() {
                 href={`https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`}
                 label="X"
                 icon={icons.x}
+                onClick={() => handleShareClick("x")}
               />
               <ShareButton
                 href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`}
                 label="LinkedIn"
                 icon={icons.linkedin}
+                onClick={() => handleShareClick("linkedin")}
               />
               <ShareButton
                 onClick={handleCopyLink}
@@ -651,26 +660,31 @@ function BlogPostPage() {
                 href={`https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`}
                 label="X / Twitter"
                 icon={icons.x}
+                onClick={() => handleShareClick("x")}
               />
               <ShareButton
                 href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`}
                 label="LinkedIn"
                 icon={icons.linkedin}
+                onClick={() => handleShareClick("linkedin")}
               />
               <ShareButton
                 href={`https://www.reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}`}
                 label="Reddit"
                 icon={icons.reddit}
+                onClick={() => handleShareClick("reddit")}
               />
               <ShareButton
                 href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`}
                 label="Facebook"
                 icon={icons.facebook}
+                onClick={() => handleShareClick("facebook")}
               />
               <ShareButton
                 href={`https://api.whatsapp.com/send?text=${encodedTitle}%20${encodedUrl}`}
                 label="WhatsApp"
                 icon={icons.whatsapp}
+                onClick={() => handleShareClick("whatsapp")}
               />
               <ShareButton
                 onClick={handleCopyLink}
