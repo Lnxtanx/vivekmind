@@ -303,7 +303,7 @@ export async function toggleCommentLike(commentId: string): Promise<{
 /**
  * Record a unique blog post view
  */
-export async function recordPostView(slug: string, postId: string, readerId: string): Promise<{ success: boolean; unique: boolean }> {
+export async function recordPostView(slug: string, postId: string, readerId: string): Promise<{ success: boolean; unique: boolean; view_count?: number }> {
   try {
     const response = await fetch(`${API_BASE}/api/blog/${slug}/view`, {
       method: 'POST',
@@ -321,6 +321,23 @@ export async function recordPostView(slug: string, postId: string, readerId: str
   } catch (error) {
     console.error('Failed to record post view:', error);
     return { success: false, unique: false };
+  }
+}
+
+/**
+ * Get post views count
+ */
+export async function getPostViewCount(slug: string): Promise<number> {
+  try {
+    const response = await fetch(`${API_BASE}/api/blog/${slug}/views`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch views count');
+    }
+    const data = await response.json();
+    return data.view_count || 0;
+  } catch (error) {
+    console.error('Failed to fetch views count:', error);
+    return 0;
   }
 }
 

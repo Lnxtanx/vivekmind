@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { fetchBlogPost, fetchLatestPosts, type BlogPost, recordPostView, sendPostHeartbeat, recordPostShare } from "@/lib/api/blog";
 import { useState, useEffect, useCallback, useRef } from "react";
 import { BlogPostLikes } from "@/components/BlogPostLikes";
+import { BlogPostViews } from "@/components/BlogPostViews";
+import { BlogSubscribe } from "@/components/BlogSubscribe";
 import { CommentList } from "@/components/BlogComments";
 import { getOrCreateAnalyticsIdentity } from "@/lib/api/analytics";
 
@@ -564,6 +566,7 @@ function BlogPostPage() {
 
             {/* Top share actions */}
             <div className="flex items-center gap-2">
+              <BlogPostViews slug={post.slug} initialCount={post.view_count} />
               <BlogPostLikes slug={post.slug} />
               <ShareButton
                 href={`https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`}
@@ -691,6 +694,11 @@ function BlogPostPage() {
                 label={copied ? "Copied!" : "Copy link"}
                 icon={copied ? icons.check : icons.copy}
               />
+            </div>
+
+            {/* Subscribe container */}
+            <div className="mt-4 pt-6 border-t border-border">
+              <BlogSubscribe />
             </div>
           </div>
         </div>
