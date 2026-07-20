@@ -8,7 +8,7 @@ const PRODUCT_URLS = {
   sqlEditor: "https://sql-editor.schemaweaver.vivekmind.com",
   dataExplorer: "https://data-explorer.schemaweaver.vivekmind.com",
   swDocs: "https://docs.schemaweaver.vivekmind.com",
-  fairyForge: "https://fairyforge.vivekmind.com",
+  vivekmindCli: "https://code.vivekmind.com/",
   press: "https://press.vivekmind.com",
 };
 
@@ -28,11 +28,11 @@ const products = [
   },
   {
     index: "02",
-    name: "FairyForge",
-    category: "Workflow Automation",
+    name: "vivekmind cli",
+    category: "AI Coding Agent",
     description:
-      "Workflow intelligence engine. Build and orchestrate AI-powered workflows that respond to events, process data, and integrate with any system — from simple triggers to complex multi-step pipelines.",
-    href: PRODUCT_URLS.fairyForge,
+      "Open-source AI coding agent. Connect any model from any provider, including Claude, GPT, Gemini, all native AWS models from AWS Bedrock, and more — right from your terminal.",
+    href: PRODUCT_URLS.vivekmindCli,
   },
   {
     index: "03",
@@ -51,20 +51,20 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "VivekMind designs and builds AI-powered products for developers and technical teams. Schema Weaver (PostgreSQL tools), FairyForge (workflow automation), and VivekMind Press (publishing platform).",
+          "VivekMind designs and builds AI-powered products for developers and technical teams. Schema Weaver (PostgreSQL tools), vivekmind cli (AI coding agent), and VivekMind Press (publishing platform).",
       },
       { property: "og:title", content: "VivekMind — AI Systems, Tools & Infrastructure" },
       {
         property: "og:description",
         content:
-          "AI-powered products for developers and teams. Schema Weaver, FairyForge, and VivekMind Press — built by VivekMind.",
+          "AI-powered products for developers and teams. Schema Weaver, vivekmind cli, and VivekMind Press — built by VivekMind.",
       },
       { property: "og:url", content: "https://vivekmind.com/" },
       { name: "twitter:title", content: "VivekMind — AI Systems, Tools & Infrastructure" },
       {
         name: "twitter:description",
         content:
-          "Schema Weaver, FairyForge, VivekMind Press — AI-powered products for developers and technical teams.",
+          "Schema Weaver, vivekmind cli, VivekMind Press — AI-powered products for developers and technical teams.",
       },
     ],
     links: [{ rel: "canonical", href: "https://vivekmind.com/" }],

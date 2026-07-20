@@ -6,7 +6,7 @@ export const Route = createFileRoute("/privacy")({
       { title: "Privacy Policy — VivekMind" },
       {
         name: "description",
-        content: "VivekMind privacy policy — how we collect, use, protect, and manage your data across Schema Weaver, FairyForge, and VivekMind Press.",
+        content: "VivekMind privacy policy — how we collect, use, protect, and manage your data across Schema Weaver, vivekmind cli, and VivekMind Press.",
       },
       { property: "og:title", content: "Privacy Policy — VivekMind" },
       { property: "og:description", content: "How VivekMind collects, uses, and protects your data across all its products." },
@@ -26,7 +26,7 @@ function PrivacyPage() {
       <p className="mt-2 text-sm text-muted-foreground">Last updated: April 2026</p>
 
       <p className="mt-8 text-muted-foreground leading-relaxed">
-        VivekMind ("we", "our", or "us") operates the vivekmind.com website and the following products: Schema Weaver, FairyForge, and VivekMind Press. This Privacy Policy explains what information we collect, how we use it, and the choices you have.
+        VivekMind ("we", "our", or "us") operates the vivekmind.com website and the following products: Schema Weaver, vivekmind cli, and VivekMind Press. This Privacy Policy explains what information we collect, how we use it, and the choices you have.
       </p>
 
       <div className="mt-12 space-y-10">

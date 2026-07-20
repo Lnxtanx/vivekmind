@@ -7,7 +7,7 @@ const PRODUCT_URLS = {
   dataExplorer: "https://data-explorer.schemaweaver.vivekmind.com",
   swDocs: "https://docs.schemaweaver.vivekmind.com",
   pricing: "https://schemaweaver.vivekmind.com/pricing",
-  fairyForge: "https://fairyforge.vivekmind.com",
+  vivekmindCli: "https://code.vivekmind.com/",
   press: "https://press.vivekmind.com",
 };
 
@@ -80,12 +80,12 @@ export function Footer() {
             <p className="text-xs font-semibold uppercase tracking-wider opacity-40">More Products</p>
             <div className="mt-4 flex flex-col gap-2.5">
               <a
-                href={PRODUCT_URLS.fairyForge}
+                href={PRODUCT_URLS.vivekmindCli}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm font-semibold opacity-80 hover:opacity-100 transition-opacity"
               >
-                FairyForge
+                vivekmind cli
               </a>
               <a
                 href={PRODUCT_URLS.press}

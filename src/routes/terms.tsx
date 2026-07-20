@@ -6,7 +6,7 @@ export const Route = createFileRoute("/terms")({
       { title: "Terms of Service — VivekMind" },
       {
         name: "description",
-        content: "VivekMind Terms of Service — rules and guidelines for using Schema Weaver, FairyForge, VivekMind Press, and all VivekMind products.",
+        content: "VivekMind Terms of Service — rules and guidelines for using Schema Weaver, vivekmind cli, VivekMind Press, and all VivekMind products.",
       },
       { property: "og:title", content: "Terms of Service — VivekMind" },
       { property: "og:description", content: "Rules and guidelines for using VivekMind products and services." },
@@ -26,7 +26,7 @@ function TermsPage() {
       <p className="mt-2 text-sm text-muted-foreground">Last updated: April 2026</p>
 
       <p className="mt-8 text-muted-foreground leading-relaxed">
-        These Terms of Service ("Terms") govern your access to and use of VivekMind products and services, including Schema Weaver, FairyForge, VivekMind Press, and the vivekmind.com website ("Services"). By accessing or using the Services, you agree to be bound by these Terms. If you do not agree, do not use the Services.
+        These Terms of Service ("Terms") govern your access to and use of VivekMind products and services, including Schema Weaver, vivekmind cli, VivekMind Press, and the vivekmind.com website ("Services"). By accessing or using the Services, you agree to be bound by these Terms. If you do not agree, do not use the Services.
       </p>
 
       <div className="mt-12 space-y-10">

@@ -21,7 +21,7 @@ const globalStructuredData = {
         "height": 60,
       },
       "description":
-        "VivekMind designs and builds AI-powered products for developers, data teams, and technical organisations — from database management (Schema Weaver) and workflow orchestration (FairyForge) to content publishing (VivekMind Press).",
+        "VivekMind designs and builds AI-powered products for developers, data teams, and technical organisations — from database management (Schema Weaver) and AI coding tools (vivekmind cli) to content publishing (VivekMind Press).",
       "email": "vivek@vivekmind.com",
       "contactPoint": {
         "@type": "ContactPoint",
@@ -44,10 +44,10 @@ const globalStructuredData = {
         },
         {
           "@type": "SoftwareApplication",
-          "name": "FairyForge",
-          "url": "https://fairyforge.vivekmind.com",
-          "applicationCategory": "BusinessApplication",
-          "description": "Workflow intelligence engine for building and orchestrating AI-powered automations that react to events, process data, and scale on demand.",
+          "name": "vivekmind cli",
+          "url": "https://code.vivekmind.com/",
+          "applicationCategory": "DeveloperApplication",
+          "description": "Open-source AI coding agent. Connect any model from any provider, including Claude, GPT, Gemini, all native AWS models from AWS Bedrock, and more.",
         },
         {
           "@type": "WebApplication",
@@ -64,7 +64,7 @@ const globalStructuredData = {
       "url": SITE_URL,
       "name": "VivekMind",
       "description":
-        "VivekMind designs and builds AI-powered products: Schema Weaver (PostgreSQL tools), FairyForge (workflow automation), and VivekMind Press (content publishing).",
+        "VivekMind designs and builds AI-powered products: Schema Weaver (PostgreSQL tools), vivekmind cli (AI coding agent), and VivekMind Press (content publishing).",
       "publisher": { "@id": `${SITE_URL}/#organization` },
       "potentialAction": {
         "@type": "SearchAction",
@@ -106,7 +106,7 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "VivekMind designs and builds AI-powered products for developers and technical teams — Schema Weaver (PostgreSQL schema management), FairyForge (workflow automation engine), and VivekMind Press (AI publishing platform).",
+          "VivekMind designs and builds AI-powered products for developers and technical teams — Schema Weaver (PostgreSQL schema management), vivekmind cli (AI coding agent), and VivekMind Press (AI publishing platform).",
       },
       { name: "author", content: "VivekMind" },
       { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },

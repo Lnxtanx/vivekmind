@@ -3,7 +3,7 @@ import logo from "../assets/vivekmind-logo.png";
 
 const PRODUCT_URLS = {
   schemaWeaver: "https://schemaweaver.vivekmind.com",
-  fairyForge: "https://fairyforge.vivekmind.com",
+  vivekmindCli: "https://code.vivekmind.com/",
   press: "https://press.vivekmind.com",
 };
 
@@ -14,12 +14,12 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "VivekMind is an AI-first technology company building intelligent developer tools — Schema Weaver, FairyForge, and VivekMind Press. We ship software that thinks alongside you.",
+          "VivekMind is an AI-first technology company building intelligent developer tools — Schema Weaver, vivekmind cli, and VivekMind Press. We ship software that thinks alongside you.",
       },
       { property: "og:title", content: "About — VivekMind" },
       {
         property: "og:description",
-        content: "VivekMind builds AI-first developer tools: Schema Weaver, FairyForge, and VivekMind Press.",
+        content: "VivekMind builds AI-first developer tools: Schema Weaver, vivekmind cli, and VivekMind Press.",
       },
       { property: "og:url", content: "https://vivekmind.com/about" },
       { name: "twitter:title", content: "About — VivekMind" },
@@ -120,10 +120,10 @@ function AboutPage() {
                 href: PRODUCT_URLS.schemaWeaver,
               },
               {
-                name: "FairyForge",
-                category: "Workflow Automation",
-                tagline: "Workflow intelligence engine",
-                href: PRODUCT_URLS.fairyForge,
+                name: "vivekmind cli",
+                category: "AI Coding Agent",
+                tagline: "Open-source AI coding agent",
+                href: PRODUCT_URLS.vivekmindCli,
               },
               {
                 name: "VivekMind Press",

@@ -14,7 +14,7 @@ const PRODUCT_URLS = {
 const faqs: { q: string; a: string }[] = [
   {
     q: "What is VivekMind?",
-    a: "VivekMind is an AI-first technology company that builds intelligent products for developers, data teams, and technical organisations. Our products include Schema Weaver (PostgreSQL schema management), FairyForge (workflow automation), and VivekMind Press (AI-assisted publishing).",
+    a: "VivekMind is an AI-first technology company that builds intelligent products for developers, data teams, and technical organisations. Our products include Schema Weaver (PostgreSQL schema management), vivekmind cli (AI coding agent), and VivekMind Press (AI-assisted publishing).",
   },
   {
     q: "What is Schema Weaver?",
@@ -25,8 +25,8 @@ const faqs: { q: string; a: string }[] = [
     a: "The SQL Editor is for schema design — write DDL, visualize your ER diagram, run migrations, and manage your schema files. The Data Explorer is for querying and analyzing live data — browse tables, run SQL, and use Resona AI to analyze your data in natural language.",
   },
   {
-    q: "What is FairyForge?",
-    a: "FairyForge is a workflow intelligence engine. It lets you build and orchestrate AI-powered workflows that react to events, process data, and integrate with any system — from simple automations to complex multi-step pipelines.",
+    q: "What is vivekmind cli?",
+    a: "vivekmind cli is an open-source AI coding agent. It lets you connect any model from any provider, including Claude, GPT, Gemini, all native AWS models from AWS Bedrock, and more — right from your terminal.",
   },
   {
     q: "What is VivekMind Press?",
@@ -53,10 +53,10 @@ export const Route = createFileRoute("/support")({
       {
         name: "description",
         content:
-          "Get help with Schema Weaver, FairyForge, and VivekMind Press. Find answers to common questions or contact our support team.",
+          "Get help with Schema Weaver, vivekmind cli, and VivekMind Press. Find answers to common questions or contact our support team.",
       },
       { property: "og:title", content: "Support — VivekMind" },
-      { property: "og:description", content: "Get help with VivekMind products — Schema Weaver, FairyForge, and VivekMind Press." },
+      { property: "og:description", content: "Get help with VivekMind products — Schema Weaver, vivekmind cli, and VivekMind Press." },
       { property: "og:url", content: "https://vivekmind.com/support" },
       { name: "twitter:title", content: "Support — VivekMind" },
       { name: "twitter:description", content: "Get help with VivekMind products." },

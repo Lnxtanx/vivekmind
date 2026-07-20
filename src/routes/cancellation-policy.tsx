@@ -35,7 +35,7 @@ function CancellationPolicyPage() {
           <h2 className="text-base font-bold text-foreground">1. How to Cancel</h2>
           <div className="mt-4 space-y-4 text-sm text-muted-foreground leading-relaxed">
             <p>
-              You can cancel your subscription at any time through your <strong className="text-foreground">Account Settings</strong> within the specific product (e.g., Schema Weaver, FairyForge). 
+              You can cancel your subscription at any time through your <strong className="text-foreground">Account Settings</strong> within the specific product (e.g., Schema Weaver, vivekmind cli). 
             </p>
             <p>
               Alternatively, you can request a cancellation by emailing us at <strong className="text-foreground">support@vivekmind.com</strong>.

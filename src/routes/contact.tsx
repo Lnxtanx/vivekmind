@@ -5,7 +5,7 @@ const contacts = [
   { label: "General Support", email: "support@vivekmind.com" },
   { label: "Founder", email: "vivek@vivekmind.com" },
   { label: "Schema Weaver", email: "schemaweaver@vivekmind.com" },
-  { label: "FairyForge", email: "fairyforge@vivekmind.com" },
+  { label: "vivekmind cli", email: "cli@vivekmind.com" },
   { label: "VivekMind Press", email: "press@vivekmind.com" },
 ];
 
@@ -16,7 +16,7 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Get in touch with VivekMind. Reach out for partnerships, product inquiries, or general questions about Schema Weaver, FairyForge, or VivekMind Press.",
+          "Get in touch with VivekMind. Reach out for partnerships, product inquiries, or general questions about Schema Weaver, vivekmind cli, or VivekMind Press.",
       },
       { property: "og:title", content: "Contact — VivekMind" },
       { property: "og:description", content: "Get in touch with VivekMind for partnerships and product inquiries." },
@@ -139,7 +139,7 @@ function ContactPage() {
                   >
                     <option value="">Select a topic</option>
                     <option value="schema-weaver">Schema Weaver</option>
-                    <option value="fairyforge">FairyForge</option>
+                    <option value="cli">vivekmind cli</option>
                     <option value="press">VivekMind Press</option>
                     <option value="partnership">Partnership</option>
                     <option value="other">Other</option>
