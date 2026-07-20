@@ -6,7 +6,7 @@ const PRODUCT_URLS = {
   sqlEditor: "https://sql-editor.schemaweaver.vivekmind.com",
   dataExplorer: "https://data-explorer.schemaweaver.vivekmind.com",
   swDocs: "https://docs.schemaweaver.vivekmind.com",
-  fairyForge: "https://fairyforge.vivekmind.com",
+  codingCLI: "https://code.vivekmind.com/",
   press: "https://press.vivekmind.com",
 };
 
@@ -14,7 +14,7 @@ const allProductsStructuredData = {
   "@context": "https://schema.org",
   "@type": "ItemList",
   name: "VivekMind Products",
-  description: "AI-powered products by VivekMind — Schema Weaver, FairyForge, and VivekMind Press.",
+  description: "AI-powered products by VivekMind — Schema Weaver, Coding CLI (vivekmind), and VivekMind Press.",
   itemListElement: [
     {
       "@type": "ListItem",
@@ -44,19 +44,19 @@ const allProductsStructuredData = {
       position: 2,
       item: {
         "@type": "SoftwareApplication",
-        name: "FairyForge",
-        url: PRODUCT_URLS.fairyForge,
-        applicationCategory: "BusinessApplication",
-        operatingSystem: "Web Browser",
+        name: "Coding CLI (vivekmind)",
+        url: PRODUCT_URLS.codingCLI,
+        applicationCategory: "DeveloperApplication",
+        operatingSystem: "macOS, Linux, Windows",
         description:
-          "Workflow intelligence engine for building and orchestrating AI-powered automations that respond to events, process data, and scale on demand.",
+          "The open source AI coding agent. Connect any model from any provider, including Claude, GPT, Gemini, all native AWS models from AWS Bedrock, and more.",
         featureList: [
-          "Visual workflow builder",
-          "Event triggers: webhooks, schedules, DB events",
-          "AI pipeline steps with LLM integration",
-          "Branching and conditional routing",
-          "High-volume scale engine with retry logic",
-          "Pre-built connectors for APIs and services",
+          "Connect any model from any provider",
+          "Support for Claude, GPT, Gemini",
+          "Native AWS Bedrock models integration",
+          "Cross-platform: macOS, Linux, Windows",
+          "Open source AI coding agent",
+          "Install via npm: npm i -g vivekmind",
         ],
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
         publisher: { "@type": "Organization", name: "VivekMind", url: "https://vivekmind.com" },
@@ -91,23 +91,23 @@ const allProductsStructuredData = {
 export const Route = createFileRoute("/products")({
   head: () => ({
     meta: [
-      { title: "Products — Schema Weaver, FairyForge & VivekMind Press | VivekMind" },
+      { title: "Products — Schema Weaver, Coding CLI & VivekMind Press | VivekMind" },
       {
         name: "description",
         content:
-          "VivekMind builds three AI-powered products: Schema Weaver (PostgreSQL schema management), FairyForge (workflow automation engine), and VivekMind Press (AI-assisted publishing platform).",
+          "VivekMind builds three AI-powered products: Schema Weaver (PostgreSQL schema management), Coding CLI (vivekmind - AI coding agent), and VivekMind Press (AI-assisted publishing platform).",
       },
-      { property: "og:title", content: "Products — Schema Weaver, FairyForge & VivekMind Press | VivekMind" },
+      { property: "og:title", content: "Products — Schema Weaver, Coding CLI & VivekMind Press | VivekMind" },
       {
         property: "og:description",
         content:
-          "Three AI-powered products by VivekMind: Schema Weaver for PostgreSQL teams, FairyForge for workflow automation, and VivekMind Press for content publishing.",
+          "Three AI-powered products by VivekMind: Schema Weaver for PostgreSQL teams, Coding CLI (vivekmind) for AI coding, and VivekMind Press for content publishing.",
       },
       { property: "og:url", content: "https://vivekmind.com/products" },
       { name: "twitter:title", content: "Products — VivekMind" },
       {
         name: "twitter:description",
-        content: "Schema Weaver, FairyForge, VivekMind Press — AI-powered products by VivekMind.",
+        content: "Schema Weaver, Coding CLI (vivekmind), VivekMind Press — AI-powered products by VivekMind.",
       },
     ],
     links: [{ rel: "canonical", href: "https://vivekmind.com/products" }],
@@ -240,60 +240,79 @@ function ProductsPage() {
         </div>
       </section>
 
-      {/* ── FairyForge ────────────────────────────────────────────────── */}
+      {/* ── Coding CLI (vivekmind) ─────────────────────────────────────── */}
       <section className="border-t border-border bg-card/30">
         <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
           {/* Header row */}
           <div className="flex flex-wrap items-start justify-between gap-6">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Workflow Automation</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">AI Coding Agent</p>
               <div className="mt-3 flex items-center gap-3">
                 <img src={logo} alt="" className="h-8 w-auto opacity-90" />
-                <h2 className="text-3xl font-extrabold text-foreground md:text-4xl">FairyForge</h2>
+                <h2 className="text-3xl font-extrabold text-foreground md:text-4xl">Coding CLI</h2>
               </div>
-              <p className="mt-1 text-sm text-muted-foreground font-mono">fairyforge.vivekmind.com</p>
+              <p className="mt-1 text-sm text-muted-foreground font-mono">code.vivekmind.com</p>
             </div>
             <a
-              href={PRODUCT_URLS.fairyForge}
+              href={PRODUCT_URLS.codingCLI}
               target="_blank"
               rel="noopener noreferrer"
-              className="shrink-0 inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-6 py-2.5 text-sm font-semibold text-accent hover:bg-accent/20 transition-all"
+              className="shrink-0 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-all"
             >
-              Open FairyForge <ExternalIcon />
+              Open Coding CLI <ExternalIcon />
             </a>
           </div>
 
           {/* Description */}
           <p className="mt-8 max-w-3xl text-lg text-muted-foreground leading-relaxed">
-            A workflow intelligence engine for building and orchestrating AI-powered automations. React to events, process data, and integrate AI capabilities at any scale — from simple triggers to complex multi-step pipelines.
+            The open source AI coding agent. Connect any model from any provider, including Claude, GPT, Gemini, all native AWS models from AWS Bedrock, and more.
           </p>
+
+          {/* Platform badges */}
+          <div className="mt-6 flex flex-wrap gap-2">
+            {["macOS", "Linux", "Windows"].map((platform) => (
+              <span
+                key={platform}
+                className="inline-flex items-center rounded-md bg-primary/10 px-3 py-1 text-xs font-medium text-primary"
+              >
+                {platform}
+              </span>
+            ))}
+          </div>
+
+          {/* Install command */}
+          <div className="mt-6">
+            <code className="inline-flex items-center gap-2 rounded-lg bg-muted px-4 py-2.5 text-sm font-mono text-muted-foreground">
+              npm i -g vivekmind
+            </code>
+          </div>
 
           {/* Features */}
           <div className="mt-14 grid gap-0 sm:grid-cols-2 lg:grid-cols-3">
             {[
               {
-                title: "Visual Workflow Builder",
-                desc: "Design multi-step workflows with a drag-and-drop canvas. Connect triggers, actions, and AI steps visually.",
+                title: "Any Model, Any Provider",
+                desc: "Connect to Claude, GPT, Gemini, and all native AWS Bedrock models. Choose the best AI for your workflow.",
               },
               {
-                title: "Event Triggers",
-                desc: "React to webhooks, scheduled crons, database events, API calls, and custom signals from any system.",
+                title: "Cross-Platform",
+                desc: "Native support for macOS, Linux, and Windows. Install once, code anywhere.",
               },
               {
-                title: "AI Pipeline Steps",
-                desc: "Embed LLM calls, classification, summarisation, and AI decision-making directly into any workflow step.",
+                title: "Open Source",
+                desc: "Fully open source AI coding agent. Transparent, extensible, and community-driven.",
               },
               {
-                title: "Branching & Conditionals",
-                desc: "Route workflow paths based on data values, HTTP status codes, AI decisions, or custom logic.",
+                title: "Model Flexibility",
+                desc: "Switch between providers seamlessly. Use the right model for each task without vendor lock-in.",
               },
               {
-                title: "Scale Engine",
-                desc: "Process high volumes with built-in concurrency, retry logic, dead-letter queues, and observability.",
+                title: "AWS Bedrock Native",
+                desc: "First-class support for all AWS Bedrock models with native integration and optimized performance.",
               },
               {
-                title: "Integrations",
-                desc: "Pre-built connectors for APIs, databases, messaging queues, and SaaS tools. Anything else via HTTP.",
+                title: "Easy Installation",
+                desc: "One command install via npm. Get started coding with AI in seconds.",
               },
             ].map((f) => (
               <div key={f.title} className="border-t border-border py-6 pr-8">
