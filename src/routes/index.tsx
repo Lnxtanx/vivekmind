@@ -28,7 +28,7 @@ const products = [
   },
   {
     index: "02",
-    name: "vivekmind cli",
+    name: "Vivekmind CLI",
     category: "AI Coding Agent",
     description:
       "Open-source AI coding agent. Connect any model from any provider, including Claude, GPT, Gemini, all native AWS models from AWS Bedrock, and more — right from your terminal.",
@@ -36,7 +36,7 @@ const products = [
   },
   {
     index: "03",
-    name: "VivekMind Press",
+    name: "Vivekmind Press",
     category: "Content Platform",
     description:
       "AI-assisted publishing platform. Create, manage, and distribute technical content at scale — documentation, newsletters, and long-form articles — with AI as a native part of the workflow.",
@@ -47,24 +47,24 @@ const products = [
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "VivekMind — AI Systems, Tools & Infrastructure" },
+      { title: "Vivekmind — AI Tools & Developer Infrastructure" },
       {
         name: "description",
         content:
-          "VivekMind designs and builds AI-powered products for developers and technical teams. Schema Weaver (PostgreSQL tools), vivekmind cli (AI coding agent), and VivekMind Press (publishing platform).",
+          "Vivekmind is a software company building AI tools, developer tools, and infrastructure. Home of Schema Weaver, the AI-native PostgreSQL workspace.",
       },
-      { property: "og:title", content: "VivekMind — AI Systems, Tools & Infrastructure" },
+      { property: "og:title", content: "Vivekmind — AI Tools & Developer Infrastructure" },
       {
         property: "og:description",
         content:
-          "AI-powered products for developers and teams. Schema Weaver, vivekmind cli, and VivekMind Press — built by VivekMind.",
+          "Vivekmind builds AI-native developer tools. Discover Schema Weaver, the intelligent PostgreSQL workspace for schema management and migrations.",
       },
       { property: "og:url", content: "https://vivekmind.com/" },
-      { name: "twitter:title", content: "VivekMind — AI Systems, Tools & Infrastructure" },
+      { name: "twitter:title", content: "Vivekmind — AI Tools & Developer Infrastructure" },
       {
         name: "twitter:description",
         content:
-          "Schema Weaver, vivekmind cli, VivekMind Press — AI-powered products for developers and technical teams.",
+          "Vivekmind builds AI-native developer tools. Discover Schema Weaver, the intelligent PostgreSQL workspace.",
       },
     ],
     links: [{ rel: "canonical", href: "https://vivekmind.com/" }],
@@ -109,8 +109,8 @@ function Index() {
         <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.04] to-transparent pointer-events-none" />
         <div className="relative mx-auto max-w-7xl px-6 pt-20 pb-20 md:pt-36 md:pb-28 lg:px-8">
           <div className="flex items-center gap-2.5 mb-8">
-            <img src={logo} alt="VivekMind Logo" className="hidden md:block h-5 w-auto" />
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">VivekMind</p>
+            <img src={logo} alt="Vivekmind Logo" className="hidden md:block h-5 w-auto" />
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Vivekmind</p>
           </div>
           <h1 className="max-w-3xl text-5xl font-extrabold leading-[1.06] tracking-tight text-foreground md:text-6xl lg:text-[5.25rem]">
             AI systems, tools &amp; infrastructure.
@@ -162,13 +162,13 @@ function Index() {
                 Software that thinks with you, not around you.
               </h2>
               <p className="mt-6 text-muted-foreground leading-relaxed text-lg">
-                Every VivekMind product ships with AI as a first-class citizen — not bolted on as a feature. From database migrations to content publishing, we build tools that are intelligent by default.
+                Every Vivekmind product ships with AI as a first-class citizen — not bolted on as a feature. From database migrations to content publishing, we build tools that are intelligent by default.
               </p>
               <Link
                 to="/about"
                 className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
               >
-                About VivekMind <ArrowRight />
+                About Vivekmind <ArrowRight />
               </Link>
             </div>
             <div className="grid grid-cols-2 gap-x-8 gap-y-10 pt-2">
@@ -196,7 +196,7 @@ function Index() {
         <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
           <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
             <div className="max-w-lg">
-              <h2 className="text-3xl font-extrabold text-foreground md:text-4xl">Build with VivekMind.</h2>
+              <h2 className="text-3xl font-extrabold text-foreground md:text-4xl">Build with Vivekmind.</h2>
               <p className="mt-4 text-lg text-muted-foreground">
                 Three products. One mission: intelligent software that moves with you.
               </p>

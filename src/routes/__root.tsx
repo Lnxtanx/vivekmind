@@ -12,7 +12,8 @@ const globalStructuredData = {
     {
       "@type": "Organization",
       "@id": `${SITE_URL}/#organization`,
-      "name": "VivekMind",
+      "name": "Vivekmind",
+      "alternateName": ["Vivek Mind", "VM", "Vivekmind AI", "Vivekmind Software", "Vivekmind Infrastructure", "Vivekmind Developer Tools"],
       "url": SITE_URL,
       "logo": {
         "@type": "ImageObject",
@@ -21,7 +22,7 @@ const globalStructuredData = {
         "height": 60,
       },
       "description":
-        "VivekMind designs and builds AI-powered products for developers, data teams, and technical organisations — from database management (Schema Weaver) and AI coding tools (vivekmind cli) to content publishing (VivekMind Press).",
+        "Vivekmind is a software company building AI tools, developer tools, and infrastructure products.",
       "email": "vivek@vivekmind.com",
       "contactPoint": {
         "@type": "ContactPoint",
@@ -31,10 +32,13 @@ const globalStructuredData = {
       "owns": [
         {
           "@type": "SoftwareApplication",
+          "@id": `${SITE_URL}/#schema-weaver`,
           "name": "Schema Weaver",
           "url": "https://schemaweaver.vivekmind.com",
           "applicationCategory": "DeveloperApplication",
-          "description": "PostgreSQL schema management platform with visual SQL Editor, auto-generated ER diagrams, migration engine with drift detection, and AI-powered Data Explorer.",
+          "description": "AI-native PostgreSQL workspace for schema management, visual editing, and safe migrations.",
+          "brand": { "@id": `${SITE_URL}/#organization` },
+          "isPartOf": { "@id": `${SITE_URL}/#organization` },
           "offers": {
             "@type": "Offer",
             "url": "https://schemaweaver.vivekmind.com/pricing",
@@ -44,17 +48,25 @@ const globalStructuredData = {
         },
         {
           "@type": "SoftwareApplication",
-          "name": "vivekmind cli",
+          "@id": `${SITE_URL}/#vivekmind-cli`,
+          "name": "Vivekmind CLI",
+          "alternateName": "vivekmind",
           "url": "https://code.vivekmind.com/",
           "applicationCategory": "DeveloperApplication",
+          "operatingSystem": ["macOS", "Linux", "Windows"],
           "description": "Open-source AI coding agent. Connect any model from any provider, including Claude, GPT, Gemini, all native AWS models from AWS Bedrock, and more.",
+          "brand": { "@id": `${SITE_URL}/#organization` },
+          "isPartOf": { "@id": `${SITE_URL}/#organization` },
         },
         {
           "@type": "WebApplication",
-          "name": "VivekMind Press",
+          "@id": `${SITE_URL}/#vivekmind-press`,
+          "name": "Vivekmind Press",
           "url": "https://press.vivekmind.com",
           "applicationCategory": "BusinessApplication",
-          "description": "AI-assisted publishing platform for writing, managing, and distributing technical content — documentation sites, newsletters, and long-form articles.",
+          "description": "AI-assisted publishing platform for writing, managing, and distributing technical content.",
+          "brand": { "@id": `${SITE_URL}/#organization` },
+          "isPartOf": { "@id": `${SITE_URL}/#organization` },
         },
       ],
     },
@@ -62,15 +74,15 @@ const globalStructuredData = {
       "@type": "WebSite",
       "@id": `${SITE_URL}/#website`,
       "url": SITE_URL,
-      "name": "VivekMind",
+      "name": "Vivekmind",
       "description":
-        "VivekMind designs and builds AI-powered products: Schema Weaver (PostgreSQL tools), vivekmind cli (AI coding agent), and VivekMind Press (content publishing).",
+        "Vivekmind is a software company building AI tools, developer tools, and infrastructure. Home of Schema Weaver, Vivekmind CLI, and Vivekmind Press.",
       "publisher": { "@id": `${SITE_URL}/#organization` },
       "potentialAction": {
         "@type": "SearchAction",
         "target": {
           "@type": "EntryPoint",
-          "urlTemplate": `${SITE_URL}/products?q={search_term_string}`,
+          "urlTemplate": `${SITE_URL}/blog?q={search_term_string}`,
         },
         "query-input": "required name=search_term_string",
       },
@@ -102,29 +114,41 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "VivekMind — AI Systems, Tools & Infrastructure" },
+      { title: "Vivekmind — AI Tools & Developer Infrastructure" },
       {
         name: "description",
         content:
-          "VivekMind designs and builds AI-powered products for developers and technical teams — Schema Weaver (PostgreSQL schema management), vivekmind cli (AI coding agent), and VivekMind Press (AI publishing platform).",
+          "Vivekmind is a software company building AI tools, developer tools, and infrastructure. Home of Schema Weaver, the AI-native PostgreSQL workspace.",
       },
-      { name: "author", content: "VivekMind" },
+      { name: "author", content: "Vivekmind" },
       { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
       { name: "theme-color", content: "#0f172a" },
       { name: "msvalidate.01", content: "95BE2DE5A8DF2D7AAF00AEA9A8E300F8" },
       // Open Graph
       { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "VivekMind" },
+      { property: "og:site_name", content: "Vivekmind" },
+      { property: "og:title", content: "Vivekmind — AI Tools & Developer Infrastructure" },
+      {
+        property: "og:description",
+        content: "Vivekmind builds AI-native developer tools. Discover Schema Weaver, the intelligent PostgreSQL workspace for schema management and migrations.",
+      },
+      { property: "og:url", content: SITE_URL },
       { property: "og:image", content: `${SITE_URL}/vivekmind-logo.png` },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       // Twitter Card
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@vivekmind" },
+      { name: "twitter:title", content: "Vivekmind — AI Tools & Developer Infrastructure" },
+      {
+        name: "twitter:description",
+        content: "Vivekmind builds AI-native developer tools. Discover Schema Weaver, the intelligent PostgreSQL workspace.",
+      },
       { name: "twitter:image", content: `${SITE_URL}/vivekmind-logo.png` },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "canonical", href: SITE_URL },
       { rel: "icon", href: "/favicon.ico" },
       { rel: "sitemap", type: "application/xml", href: "/sitemap.xml" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },

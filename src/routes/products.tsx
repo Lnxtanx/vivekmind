@@ -13,8 +13,8 @@ const PRODUCT_URLS = {
 const allProductsStructuredData = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  name: "VivekMind Products",
-  description: "AI-powered products by VivekMind — Schema Weaver, Coding CLI (vivekmind), and VivekMind Press.",
+  name: "Vivekmind Products",
+  description: "AI-powered products by Vivekmind — Schema Weaver, Vivekmind CLI, and Vivekmind Press.",
   itemListElement: [
     {
       "@type": "ListItem",
@@ -26,7 +26,7 @@ const allProductsStructuredData = {
         applicationCategory: "DeveloperApplication",
         operatingSystem: "Web Browser",
         description:
-          "PostgreSQL schema management platform with visual SQL Editor, auto-generated ER diagrams, 20-layer schema compiler, migration engine with drift detection, and AI-powered Data Explorer.",
+          "AI-native PostgreSQL workspace for schema management, visual editing, and safe migrations.",
         featureList: [
           "Visual SQL editor with auto-generated ER diagrams",
           "20-layer schema compiler with A–F quality grading",
@@ -36,7 +36,7 @@ const allProductsStructuredData = {
           "Team collaboration with role-based access",
         ],
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-        publisher: { "@type": "Organization", name: "VivekMind", url: "https://vivekmind.com" },
+        publisher: { "@type": "Organization", name: "Vivekmind", url: "https://vivekmind.com" },
       },
     },
     {
@@ -44,12 +44,12 @@ const allProductsStructuredData = {
       position: 2,
       item: {
         "@type": "SoftwareApplication",
-        name: "Coding CLI (vivekmind)",
+        name: "Vivekmind CLI",
         url: PRODUCT_URLS.codingCLI,
         applicationCategory: "DeveloperApplication",
         operatingSystem: "macOS, Linux, Windows",
         description:
-          "The open source AI coding agent. Connect any model from any provider, including Claude, GPT, Gemini, all native AWS models from AWS Bedrock, and more.",
+          "Open-source AI coding agent. Connect any model from any provider, including Claude, GPT, Gemini, all native AWS models from AWS Bedrock, and more.",
         featureList: [
           "Connect any model from any provider",
           "Support for Claude, GPT, Gemini",
@@ -59,7 +59,7 @@ const allProductsStructuredData = {
           "Install via npm: npm i -g vivekmind",
         ],
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-        publisher: { "@type": "Organization", name: "VivekMind", url: "https://vivekmind.com" },
+        publisher: { "@type": "Organization", name: "Vivekmind", url: "https://vivekmind.com" },
       },
     },
     {
@@ -67,12 +67,12 @@ const allProductsStructuredData = {
       position: 3,
       item: {
         "@type": "WebApplication",
-        name: "VivekMind Press",
+        name: "Vivekmind Press",
         url: PRODUCT_URLS.press,
         applicationCategory: "BusinessApplication",
         operatingSystem: "Web Browser",
         description:
-          "AI-assisted content and publishing platform for writing, managing, and distributing technical content — documentation sites, newsletters, and long-form articles.",
+          "AI-assisted publishing platform for writing, managing, and distributing technical content.",
         featureList: [
           "AI writing assistant for technical content",
           "Documentation site publishing with custom domains",
@@ -82,7 +82,7 @@ const allProductsStructuredData = {
           "Multi-format export: web, PDF, Markdown, API",
         ],
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-        publisher: { "@type": "Organization", name: "VivekMind", url: "https://vivekmind.com" },
+        publisher: { "@type": "Organization", name: "Vivekmind", url: "https://vivekmind.com" },
       },
     },
   ],
@@ -91,23 +91,23 @@ const allProductsStructuredData = {
 export const Route = createFileRoute("/products")({
   head: () => ({
     meta: [
-      { title: "Products — Schema Weaver, Coding CLI & VivekMind Press | VivekMind" },
+      { title: "Products — Schema Weaver, Vivekmind CLI & Vivekmind Press | Vivekmind" },
       {
         name: "description",
         content:
-          "VivekMind builds three AI-powered products: Schema Weaver (PostgreSQL schema management), Coding CLI (vivekmind - AI coding agent), and VivekMind Press (AI-assisted publishing platform).",
+          "Vivekmind builds three AI-powered products: Schema Weaver (AI-native PostgreSQL workspace), Vivekmind CLI (AI coding agent), and Vivekmind Press (AI-assisted publishing platform).",
       },
-      { property: "og:title", content: "Products — Schema Weaver, Coding CLI & VivekMind Press | VivekMind" },
+      { property: "og:title", content: "Products — Schema Weaver, Vivekmind CLI & Vivekmind Press | Vivekmind" },
       {
         property: "og:description",
         content:
-          "Three AI-powered products by VivekMind: Schema Weaver for PostgreSQL teams, Coding CLI (vivekmind) for AI coding, and VivekMind Press for content publishing.",
+          "Three AI-powered products by Vivekmind: Schema Weaver for PostgreSQL teams, Vivekmind CLI for AI coding, and Vivekmind Press for content publishing.",
       },
       { property: "og:url", content: "https://vivekmind.com/products" },
-      { name: "twitter:title", content: "Products — VivekMind" },
+      { name: "twitter:title", content: "Products — Vivekmind" },
       {
         name: "twitter:description",
-        content: "Schema Weaver, Coding CLI (vivekmind), VivekMind Press — AI-powered products by VivekMind.",
+        content: "Schema Weaver, Vivekmind CLI, Vivekmind Press — AI-powered products by Vivekmind.",
       },
     ],
     links: [{ rel: "canonical", href: "https://vivekmind.com/products" }],
@@ -143,7 +143,7 @@ function ProductsPage() {
 
       {/* ── Hero ─────────────────────────────────────────────────────── */}
       <section className="mx-auto max-w-7xl px-6 pt-20 pb-16 lg:px-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">VivekMind</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Vivekmind</p>
         <h1 className="mt-5 max-w-2xl text-4xl font-extrabold leading-tight text-foreground md:text-5xl">
           Products
         </h1>
@@ -324,7 +324,7 @@ function ProductsPage() {
         </div>
       </section>
 
-      {/* ── VivekMind Press ───────────────────────────────────────────── */}
+      {/* ── Vivekmind Press ───────────────────────────────────────────── */}
       <section className="border-t border-border">
         <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
           {/* Header row */}
@@ -333,7 +333,7 @@ function ProductsPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Content Platform</p>
               <div className="mt-3 flex items-center gap-3">
                 <img src={logo} alt="" className="h-8 w-auto opacity-90" />
-                <h2 className="text-3xl font-extrabold text-foreground md:text-4xl">VivekMind Press</h2>
+                <h2 className="text-3xl font-extrabold text-foreground md:text-4xl">Vivekmind Press</h2>
               </div>
               <p className="mt-1 text-sm text-muted-foreground font-mono">press.vivekmind.com</p>
             </div>
@@ -396,7 +396,7 @@ function ProductsPage() {
             <div className="max-w-lg">
               <h2 className="text-2xl font-extrabold text-foreground md:text-3xl">Want to learn more?</h2>
               <p className="mt-3 text-muted-foreground">
-                Get in touch to learn how VivekMind's products can help your team build, automate, and publish faster.
+                Get in touch to learn how Vivekmind's products can help your team build, automate, and publish faster.
               </p>
             </div>
             <div className="flex flex-wrap gap-3 shrink-0">
@@ -410,7 +410,7 @@ function ProductsPage() {
                 to="/about"
                 className="inline-flex items-center justify-center rounded-full border border-border px-7 py-3 text-sm font-semibold text-foreground hover:bg-muted transition-all"
               >
-                About VivekMind
+                About Vivekmind
               </Link>
             </div>
           </div>
