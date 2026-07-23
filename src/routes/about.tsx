@@ -14,16 +14,21 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "VivekMind is an AI-first technology company building intelligent developer tools — Schema Weaver, vivekmind cli, and VivekMind Press. We ship software that thinks alongside you.",
+          "VivekMind builds AI-first developer tools and infrastructure, including Schema Weaver, Vivekmind CLI, and VivekMind Press. Software that thinks with you.",
       },
       { property: "og:title", content: "About — VivekMind" },
       {
         property: "og:description",
-        content: "VivekMind builds AI-first developer tools: Schema Weaver, vivekmind cli, and VivekMind Press.",
+        content:
+          "VivekMind builds AI-first developer tools and infrastructure, including Schema Weaver, Vivekmind CLI, and VivekMind Press. Software that thinks with you.",
       },
       { property: "og:url", content: "https://vivekmind.com/about" },
       { name: "twitter:title", content: "About — VivekMind" },
-      { name: "twitter:description", content: "AI systems, tools, and infrastructure for developers and technical teams." },
+      {
+        name: "twitter:description",
+        content:
+          "VivekMind builds AI-first developer tools and infrastructure, including Schema Weaver, Vivekmind CLI, and VivekMind Press. Software that thinks with you.",
+      },
     ],
     links: [{ rel: "canonical", href: "https://vivekmind.com/about" }],
   }),

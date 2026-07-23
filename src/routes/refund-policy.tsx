@@ -6,10 +6,15 @@ export const Route = createFileRoute("/refund-policy")({
       { title: "Refund Policy — VivekMind" },
       {
         name: "description",
-        content: "VivekMind refund policy — details on eligibility, processing, and timelines for refunds.",
+        content:
+          "Read the official VivekMind Refund Policy. Learn about refund eligibility, request processing, and timelines for Schema Weaver and VivekMind products.",
       },
       { property: "og:title", content: "Refund Policy — VivekMind" },
-      { property: "og:description", content: "VivekMind's official refund policy for subscriptions and services." },
+      {
+        property: "og:description",
+        content:
+          "Read the official VivekMind Refund Policy. Learn about refund eligibility, request processing, and timelines for Schema Weaver and VivekMind products.",
+      },
       { property: "og:url", content: "https://vivekmind.com/refund-policy" },
       { name: "robots", content: "index, follow" },
     ],

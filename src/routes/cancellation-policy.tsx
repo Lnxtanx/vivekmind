@@ -6,10 +6,15 @@ export const Route = createFileRoute("/cancellation-policy")({
       { title: "Cancellation Policy — VivekMind" },
       {
         name: "description",
-        content: "VivekMind cancellation policy — information on how to cancel your subscriptions and the effects of cancellation.",
+        content:
+          "Read the official VivekMind Cancellation Policy. Find out how to cancel software subscriptions, access policies, and manage account services easily.",
       },
       { property: "og:title", content: "Cancellation Policy — VivekMind" },
-      { property: "og:description", content: "VivekMind's official cancellation policy for all products and services." },
+      {
+        property: "og:description",
+        content:
+          "Read the official VivekMind Cancellation Policy. Find out how to cancel software subscriptions, access policies, and manage account services easily.",
+      },
       { property: "og:url", content: "https://vivekmind.com/cancellation-policy" },
       { name: "robots", content: "index, follow" },
     ],

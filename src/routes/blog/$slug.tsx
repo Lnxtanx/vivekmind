@@ -1,8 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { fetchBlogPost, fetchLatestPosts, type BlogPost, recordPostView, sendPostHeartbeat, recordPostShare } from "@/lib/api/blog";
 import { useState, useEffect, useCallback, useRef } from "react";
-import { BlogPostLikes } from "@/components/BlogPostLikes";
-import { BlogPostViews } from "@/components/BlogPostViews";
 import { BlogSubscribe } from "@/components/BlogSubscribe";
 import { CommentList } from "@/components/BlogComments";
 import { getOrCreateAnalyticsIdentity } from "@/lib/api/analytics";
@@ -75,7 +73,11 @@ export const Route = createFileRoute("/blog/$slug")({
     }
 
     const metaTitle = post.meta_title || post.title;
-    const metaDescription = post.meta_description || post.excerpt || "";
+    let rawDescription = post.meta_description || post.excerpt || "Read technical articles and insights on AI systems, PostgreSQL, and software developer tools from the VivekMind engineering blog.";
+    if (rawDescription.length > 160) {
+      rawDescription = rawDescription.slice(0, 157).trim() + "...";
+    }
+    const metaDescription = rawDescription;
     const ogImage = post.og_image_url || post.thumbnail_url || `${SITE_URL}/vivekmind-logo.png`;
 
     return {
@@ -87,13 +89,18 @@ export const Route = createFileRoute("/blog/$slug")({
         { property: "og:image", content: ogImage },
         { property: "og:url", content: `${SITE_URL}/blog/${post.slug}` },
         { property: "og:type", content: "article" },
-        { property: "article:published_time", content: post.published_at || undefined },
+        { property: "article:published_time", content: post.published_at ? new Date(post.published_at).toISOString() : undefined },
+        { property: "article:modified_time", content: post.updated_at ? new Date(post.updated_at).toISOString() : undefined },
         { property: "article:author", content: post.author_name },
         { property: "article:section", content: post.category },
+        { property: "article:tag", content: post.tags?.join(", ") || undefined },
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: metaTitle },
         { name: "twitter:description", content: metaDescription },
         { name: "twitter:image", content: ogImage },
+        { name: "twitter:image:width", content: "1200" },
+        { name: "twitter:image:height", content: "630" },
+        { name: "keywords", content: [post.category, ...(post.tags || [])].join(", ") },
       ],
       links: [{ rel: "canonical", href: `${SITE_URL}/blog/${post.slug}` }],
     };
@@ -566,8 +573,6 @@ function BlogPostPage() {
 
             {/* Top share actions */}
             <div className="flex items-center gap-2">
-              <BlogPostViews slug={post.slug} initialCount={post.view_count} />
-              <BlogPostLikes slug={post.slug} />
               <ShareButton
                 href={`https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`}
                 label="X"

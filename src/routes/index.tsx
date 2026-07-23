@@ -3,6 +3,8 @@ import { fetchBlogPosts, subscribeToNewsletter, type BlogPost } from "@/lib/api/
 import logo from "../assets/vivekmind-logo.png";
 import { useState, useRef, useEffect, useCallback } from "react";
 
+const SITE_URL = "https://vivekmind.com";
+
 const PRODUCT_URLS = {
   schemaWeaver: "https://schemaweaver.vivekmind.com",
   sqlEditor: "https://sql-editor.schemaweaver.vivekmind.com",
@@ -51,21 +53,29 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Vivekmind is a software company building AI tools, developer tools, and infrastructure. Home of Schema Weaver, the AI-native PostgreSQL workspace.",
+          "Vivekmind builds AI tools and developer infrastructure. Home of Schema Weaver for PostgreSQL, Vivekmind CLI for coding, and Vivekmind Press.",
       },
       { property: "og:title", content: "Vivekmind — AI Tools & Developer Infrastructure" },
       {
         property: "og:description",
         content:
-          "Vivekmind builds AI-native developer tools. Discover Schema Weaver, the intelligent PostgreSQL workspace for schema management and migrations.",
+          "Vivekmind builds AI tools and developer infrastructure. Discover Schema Weaver, Vivekmind CLI, and Vivekmind Press for technical teams.",
       },
       { property: "og:url", content: "https://vivekmind.com/" },
+      { property: "og:locale", content: "en_US" },
+      { property: "og:image", content: `${SITE_URL}/vivekmind-logo.png` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Vivekmind — AI Tools & Developer Infrastructure" },
       {
         name: "twitter:description",
         content:
-          "Vivekmind builds AI-native developer tools. Discover Schema Weaver, the intelligent PostgreSQL workspace.",
+          "Vivekmind builds AI tools and developer infrastructure. Discover Schema Weaver, Vivekmind CLI, and Vivekmind Press for technical teams.",
       },
+      { name: "twitter:image", content: `${SITE_URL}/vivekmind-logo.png` },
+      { name: "twitter:image:width", content: "1200" },
+      { name: "twitter:image:height", content: "630" },
     ],
     links: [{ rel: "canonical", href: "https://vivekmind.com/" }],
   }),

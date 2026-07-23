@@ -53,13 +53,21 @@ export const Route = createFileRoute("/support")({
       {
         name: "description",
         content:
-          "Get help with Schema Weaver, vivekmind cli, and VivekMind Press. Find answers to common questions or contact our support team.",
+          "Get help with Schema Weaver, Vivekmind CLI, and VivekMind Press. Find answers to common questions or reach out directly to our support team.",
       },
       { property: "og:title", content: "Support — VivekMind" },
-      { property: "og:description", content: "Get help with VivekMind products — Schema Weaver, vivekmind cli, and VivekMind Press." },
+      {
+        property: "og:description",
+        content:
+          "Get help with Schema Weaver, Vivekmind CLI, and VivekMind Press. Find answers to common questions or reach out directly to our support team.",
+      },
       { property: "og:url", content: "https://vivekmind.com/support" },
       { name: "twitter:title", content: "Support — VivekMind" },
-      { name: "twitter:description", content: "Get help with VivekMind products." },
+      {
+        name: "twitter:description",
+        content:
+          "Get help with Schema Weaver, Vivekmind CLI, and VivekMind Press. Find answers to common questions or reach out directly to our support team.",
+      },
     ],
     links: [{ rel: "canonical", href: "https://vivekmind.com/support" }],
   }),

@@ -13,7 +13,6 @@ const globalStructuredData = {
       "@type": "Organization",
       "@id": `${SITE_URL}/#organization`,
       "name": "Vivekmind",
-      "alternateName": ["Vivek Mind", "VM", "Vivekmind AI", "Vivekmind Software", "Vivekmind Infrastructure", "Vivekmind Developer Tools"],
       "url": SITE_URL,
       "logo": {
         "@type": "ImageObject",
@@ -118,7 +117,7 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "Vivekmind is a software company building AI tools, developer tools, and infrastructure. Home of Schema Weaver, the AI-native PostgreSQL workspace.",
+          "Vivekmind builds AI tools and developer infrastructure. Home of Schema Weaver for PostgreSQL, Vivekmind CLI for coding, and Vivekmind Press.",
       },
       { name: "author", content: "Vivekmind" },
       { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
@@ -130,19 +129,22 @@ export const Route = createRootRoute({
       { property: "og:title", content: "Vivekmind — AI Tools & Developer Infrastructure" },
       {
         property: "og:description",
-        content: "Vivekmind builds AI-native developer tools. Discover Schema Weaver, the intelligent PostgreSQL workspace for schema management and migrations.",
+        content:
+          "Vivekmind builds AI tools and developer infrastructure. Discover Schema Weaver, Vivekmind CLI, and Vivekmind Press for technical teams.",
       },
       { property: "og:url", content: SITE_URL },
       { property: "og:image", content: `${SITE_URL}/vivekmind-logo.png` },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
+      { property: "og:locale", content: "en_US" },
       // Twitter Card
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@vivekmind" },
       { name: "twitter:title", content: "Vivekmind — AI Tools & Developer Infrastructure" },
       {
         name: "twitter:description",
-        content: "Vivekmind builds AI-native developer tools. Discover Schema Weaver, the intelligent PostgreSQL workspace.",
+        content:
+          "Vivekmind builds AI tools and developer infrastructure. Discover Schema Weaver, Vivekmind CLI, and Vivekmind Press for technical teams.",
       },
       { name: "twitter:image", content: `${SITE_URL}/vivekmind-logo.png` },
     ],

@@ -3,6 +3,8 @@ import { fetchBlogPosts, fetchBlogCategories, type BlogPost } from "@/lib/api/bl
 import { BlogSubscribe } from "@/components/BlogSubscribe";
 import { z } from "zod";
 
+const SITE_URL = "https://vivekmind.com";
+
 const blogSearchSchema = z.object({
   page: z.string().optional(),
   category: z.string().optional(),
@@ -16,17 +18,30 @@ export const Route = createFileRoute("/blog/")({
       {
         name: "description",
         content:
-          "Articles and insights about AI systems, developer tools, PostgreSQL, and building intelligent software. From the VivekMind team.",
+          "Explore articles and technical insights on AI systems, PostgreSQL database management, developer tooling, and software engineering by VivekMind.",
       },
       { property: "og:title", content: "Blog — VivekMind" },
       {
         property: "og:description",
-        content: "Articles and insights about AI systems, developer tools, and building intelligent software.",
+        content:
+          "Explore articles and technical insights on AI systems, PostgreSQL database management, developer tooling, and software engineering by VivekMind.",
       },
       { property: "og:url", content: "https://vivekmind.com/blog" },
       { property: "og:type", content: "website" },
+      { property: "og:locale", content: "en_US" },
+      { property: "og:image", content: `${SITE_URL}/vivekmind-logo.png` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Blog — VivekMind" },
-      { name: "twitter:description", content: "Articles and insights about AI systems, developer tools, and building intelligent software." },
+      {
+        name: "twitter:description",
+        content:
+          "Explore articles and technical insights on AI systems, PostgreSQL database management, developer tooling, and software engineering by VivekMind.",
+      },
+      { name: "twitter:image", content: `${SITE_URL}/vivekmind-logo.png` },
+      { name: "twitter:image:width", content: "1200" },
+      { name: "twitter:image:height", content: "630" },
     ],
     links: [{ rel: "canonical", href: "https://vivekmind.com/blog" }],
   }),

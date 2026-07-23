@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import logo from "../assets/vivekmind-logo.png";
 
+const SITE_URL = "https://vivekmind.com";
+
 const PRODUCT_URLS = {
   schemaWeaver: "https://schemaweaver.vivekmind.com",
   sqlEditor: "https://sql-editor.schemaweaver.vivekmind.com",
@@ -95,20 +97,29 @@ export const Route = createFileRoute("/products")({
       {
         name: "description",
         content:
-          "Vivekmind builds three AI-powered products: Schema Weaver (AI-native PostgreSQL workspace), Vivekmind CLI (AI coding agent), and Vivekmind Press (AI-assisted publishing platform).",
+          "Discover AI-powered products by Vivekmind: Schema Weaver for PostgreSQL teams, Vivekmind CLI for AI coding, and Vivekmind Press for publishing.",
       },
       { property: "og:title", content: "Products — Schema Weaver, Vivekmind CLI & Vivekmind Press | Vivekmind" },
       {
         property: "og:description",
         content:
-          "Three AI-powered products by Vivekmind: Schema Weaver for PostgreSQL teams, Vivekmind CLI for AI coding, and Vivekmind Press for content publishing.",
+          "Discover AI-powered products by Vivekmind: Schema Weaver for PostgreSQL teams, Vivekmind CLI for AI coding, and Vivekmind Press for publishing.",
       },
       { property: "og:url", content: "https://vivekmind.com/products" },
+      { property: "og:locale", content: "en_US" },
+      { property: "og:image", content: `${SITE_URL}/vivekmind-logo.png` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Products — Vivekmind" },
       {
         name: "twitter:description",
-        content: "Schema Weaver, Vivekmind CLI, Vivekmind Press — AI-powered products by Vivekmind.",
+        content:
+          "Discover AI-powered products by Vivekmind: Schema Weaver for PostgreSQL teams, Vivekmind CLI for AI coding, and Vivekmind Press for publishing.",
       },
+      { name: "twitter:image", content: `${SITE_URL}/vivekmind-logo.png` },
+      { name: "twitter:image:width", content: "1200" },
+      { name: "twitter:image:height", content: "630" },
     ],
     links: [{ rel: "canonical", href: "https://vivekmind.com/products" }],
   }),
