@@ -8,21 +8,21 @@ import {
 } from "@/components/ui/accordion";
 
 const PRODUCT_URLS = {
-  swDocs: "https://docs.schemaweaver.vivekmind.com",
+  swDocs: "https://docs.schemaweaver.dev",
 };
 
 const faqs: { q: string; a: string }[] = [
   {
     q: "What is VivekMind?",
-    a: "VivekMind is an AI-first technology company that builds intelligent products for developers, data teams, and technical organisations. Our products include Schema Weaver (PostgreSQL schema management), vivekmind cli (AI coding agent), and VivekMind Press (AI-assisted publishing).",
+    a: "VivekMind is an AI-first technology company that builds intelligent products for developers, data teams, and technical organisations. Our products include Schema Weaver (voice-native analytics for PostgreSQL), vivekmind cli (AI coding agent), and VivekMind Press (AI-assisted publishing).",
   },
   {
     q: "What is Schema Weaver?",
-    a: "Schema Weaver is a PostgreSQL schema management platform. It gives you a visual SQL Editor, an auto-generated ER diagram, a 20-layer schema compiler, a migration engine with drift detection, and an AI-powered Data Explorer — all in one workspace.",
+    a: "Schema Weaver is the first voice-native analytics workspace for PostgreSQL. Browse live data in a high-performance grid, ask Resona AI in plain English, or talk to your database by voice — alongside a visual SQL Editor with an auto-generated ER diagram, a 20-layer schema compiler, and a migration engine with drift detection.",
   },
   {
     q: "What's the difference between the SQL Editor and Data Explorer?",
-    a: "The SQL Editor is for schema design — write DDL, visualize your ER diagram, run migrations, and manage your schema files. The Data Explorer is for querying and analyzing live data — browse tables, run SQL, and use Resona AI to analyze your data in natural language.",
+    a: "The Data Explorer is for exploring and analyzing live data — browse tables in a high-performance grid, run SQL, generate dashboards, export results, and use Resona AI to analyze your data in natural language or by voice. The SQL Editor is for schema design — write DDL, visualize your ER diagram, run migrations, and manage your schema files.",
   },
   {
     q: "What is vivekmind cli?",
@@ -34,15 +34,15 @@ const faqs: { q: string; a: string }[] = [
   },
   {
     q: "Where can I find Schema Weaver documentation?",
-    a: "Schema Weaver documentation is available at docs.schemaweaver.vivekmind.com. It covers the SQL Editor, Data Explorer, Resona AI, migration engine, team collaboration, and more.",
+    a: "Schema Weaver documentation is available at docs.schemaweaver.dev. It covers the SQL Editor, Data Explorer, Resona AI, migration engine, team collaboration, and more.",
   },
   {
     q: "How do I get support?",
-    a: "Email us at support@vivekmind.com — our team typically responds within 24 hours on business days. For Schema Weaver-specific questions you can also email schemaweaver@vivekmind.com.",
+    a: "Email us at support@vivekmind.com — our team typically responds within 24 hours on business days. For Schema Weaver-specific questions you can also email support@schemaweaver.dev.",
   },
   {
     q: "Do you offer enterprise or custom solutions?",
-    a: "Yes. We work with organisations of all sizes. Contact us at vivek@vivekmind.com to discuss custom plans, on-premise deployments, or bespoke integrations.",
+    a: "Yes. We work with organisations of all sizes. Contact us at support@vivekmind.com to discuss custom plans, on-premise deployments, or bespoke integrations.",
   },
 ];
 

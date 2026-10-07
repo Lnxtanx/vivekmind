@@ -23,7 +23,7 @@ function TermsPage() {
     <div className="mx-auto max-w-3xl px-6 py-20 lg:py-24">
       <p className="font-mono text-xs uppercase tracking-[0.16em] text-primary">Legal</p>
       <h1 className="mt-4 text-3xl font-extrabold text-foreground md:text-4xl">Terms of Service</h1>
-      <p className="mt-2 text-sm text-muted-foreground">Last updated: April 2026</p>
+      <p className="mt-2 text-sm text-muted-foreground">Last updated: October 2026</p>
 
       <p className="mt-8 text-muted-foreground leading-relaxed">
         These Terms of Service ("Terms") govern your access to and use of VivekMind products and services, including Schema Weaver, vivekmind cli, VivekMind Press, and the vivekmind.com website ("Services"). By accessing or using the Services, you agree to be bound by these Terms. If you do not agree, do not use the Services.
@@ -73,6 +73,7 @@ function TermsPage() {
           <div className="mt-4 space-y-3 text-sm text-muted-foreground leading-relaxed">
             <p>You retain ownership of all data, schemas, workflows, and content you create or upload to the Services. By using the Services, you grant VivekMind a limited licence to process your data solely to provide the Services to you.</p>
             <p>You are responsible for ensuring you have the right to use any data, schemas, or database connections you connect to the Services. You must not connect databases or share data you do not have permission to access.</p>
+            <p>You retain ownership of the content you create through the Services, including voice recordings made during voice sessions. We process recordings only to provide the Services to you, as described in our <Link to="/privacy" className="text-primary hover:underline font-medium">Privacy Policy</Link>.</p>
           </div>
         </section>
 

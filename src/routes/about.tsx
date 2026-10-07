@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import logo from "../assets/vivekmind-logo.png";
 
 const PRODUCT_URLS = {
-  schemaWeaver: "https://schemaweaver.vivekmind.com",
+  schemaWeaver: "https://schemaweaver.dev",
   vivekmindCli: "https://code.vivekmind.com/",
   press: "https://press.vivekmind.com",
 };
@@ -120,8 +120,8 @@ function AboutPage() {
             {[
               {
                 name: "Schema Weaver",
-                category: "Database Tools",
-                tagline: "PostgreSQL schema management platform",
+                category: "Analytics Workspace",
+                tagline: "The first voice-native analytics workspace for PostgreSQL",
                 href: PRODUCT_URLS.schemaWeaver,
               },
               {

@@ -23,7 +23,7 @@ function PrivacyPage() {
     <div className="mx-auto max-w-3xl px-6 py-20 lg:py-24">
       <p className="font-mono text-xs uppercase tracking-[0.16em] text-primary">Legal</p>
       <h1 className="mt-4 text-3xl font-extrabold text-foreground md:text-4xl">Privacy Policy</h1>
-      <p className="mt-2 text-sm text-muted-foreground">Last updated: April 2026</p>
+      <p className="mt-2 text-sm text-muted-foreground">Last updated: October 2026</p>
 
       <p className="mt-8 text-muted-foreground leading-relaxed">
         VivekMind ("we", "our", or "us") operates the vivekmind.com website and the following products: Schema Weaver, vivekmind cli, and VivekMind Press. This Privacy Policy explains what information we collect, how we use it, and the choices you have.
@@ -42,6 +42,9 @@ function PrivacyPage() {
             </p>
             <p>
               <strong className="text-foreground">Database connection metadata.</strong> For Schema Weaver, we store connection credentials (encrypted at rest with AES-256) and schema snapshots. We do not access or log the contents of your database except to perform operations you explicitly request.
+            </p>
+            <p>
+              <strong className="text-foreground">Voice recordings.</strong> When you use voice features in Schema Weaver, your audio is recorded and stored alongside the conversation so you can replay it later. Recordings are linked to your account and are handled as described in Section 5.
             </p>
             <p>
               <strong className="text-foreground">Contact form submissions.</strong> When you contact us via our website, we collect the name, email address, and message you provide.
@@ -83,6 +86,9 @@ function PrivacyPage() {
             <p>
               Raw row data from your database is never stored by our AI systems — it is processed in memory only for the duration of your session and is not used for model training.
             </p>
+            <p>
+              Voice input is transcribed before it is processed. Recordings of your voice sessions are stored so that you can replay past conversations, and are removed when you delete your account.
+            </p>
           </div>
         </section>
 
@@ -110,7 +116,7 @@ function PrivacyPage() {
         <section className="border-t border-border pt-8">
           <h2 className="text-base font-bold text-foreground">7. Third-party services</h2>
           <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
-            Our products integrate with third-party services including Supabase (database hosting), Cloudflare (CDN and edge infrastructure), Anthropic and OpenAI (AI capabilities). Each service processes data under its own privacy policy. We select third-party providers with appropriate data protection standards.
+            Our products integrate with third-party services including Supabase (database hosting), Cloudflare (CDN and edge infrastructure), Anthropic and OpenAI (AI capabilities), Razorpay (payment processing), Resend (transactional email delivery), and Google and GitHub (third-party sign-in). Each service processes data under its own privacy policy. We select third-party providers with appropriate data protection standards.
           </p>
         </section>
 
@@ -139,7 +145,11 @@ function PrivacyPage() {
             <a href="mailto:support@vivekmind.com" className="text-primary hover:underline font-medium">
               support@vivekmind.com
             </a>
-            {" "}or write to: VivekMind, support@vivekmind.com.
+            {" "}or write to: VivekMind, support@vivekmind.com. For Schema Weaver data requests you can also contact{" "}
+            <a href="mailto:support@schemaweaver.dev" className="text-primary hover:underline font-medium">
+              support@schemaweaver.dev
+            </a>
+            .
           </p>
         </section>
 

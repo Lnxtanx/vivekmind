@@ -3,10 +3,8 @@ import { useState } from "react";
 
 const contacts = [
   { label: "General Support", email: "support@vivekmind.com" },
-  { label: "Founder", email: "vivek@vivekmind.com" },
-  { label: "Schema Weaver", email: "schemaweaver@vivekmind.com" },
-  { label: "vivekmind cli", email: "cli@vivekmind.com" },
-  { label: "VivekMind Press", email: "press@vivekmind.com" },
+  { label: "Schema Weaver Support", email: "support@schemaweaver.dev" },
+  { label: "Founder", email: "vivek@schemaweaver.dev" },
 ];
 
 export const Route = createFileRoute("/contact")({
@@ -29,7 +27,7 @@ export const Route = createFileRoute("/contact")({
   component: ContactPage,
 });
 
-const API_BASE = "https://api-node.schemaweaver.vivekmind.com";
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 function ContactPage() {
   const [submitted, setSubmitted] = useState(false);

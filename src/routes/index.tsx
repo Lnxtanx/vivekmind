@@ -6,10 +6,10 @@ import { useState, useRef, useEffect, useCallback } from "react";
 const SITE_URL = "https://vivekmind.com";
 
 const PRODUCT_URLS = {
-  schemaWeaver: "https://schemaweaver.vivekmind.com",
-  sqlEditor: "https://sql-editor.schemaweaver.vivekmind.com",
-  dataExplorer: "https://data-explorer.schemaweaver.vivekmind.com",
-  swDocs: "https://docs.schemaweaver.vivekmind.com",
+  schemaWeaver: "https://schemaweaver.dev",
+  sqlEditor: "https://sql-editor.schemaweaver.dev",
+  dataExplorer: "https://data-explorer.schemaweaver.dev",
+  swDocs: "https://docs.schemaweaver.dev",
   vivekmindCli: "https://code.vivekmind.com/",
   press: "https://press.vivekmind.com",
 };
@@ -18,13 +18,13 @@ const products = [
   {
     index: "01",
     name: "Schema Weaver",
-    category: "Database Tools",
+    category: "Analytics Workspace",
     description:
-      "PostgreSQL schema management platform. Design and version your database schema visually, push migrations safely with drift detection, and explore live data with AI.",
+      "The first voice-native analytics workspace for PostgreSQL. Browse live data in a high-performance grid, ask Resona AI in plain English, or talk to your database by voice.",
     href: PRODUCT_URLS.schemaWeaver,
     subLinks: [
-      { label: "SQL Editor", href: PRODUCT_URLS.sqlEditor },
       { label: "Data Explorer", href: PRODUCT_URLS.dataExplorer },
+      { label: "SQL Editor", href: PRODUCT_URLS.sqlEditor },
       { label: "Docs", href: PRODUCT_URLS.swDocs },
     ],
   },

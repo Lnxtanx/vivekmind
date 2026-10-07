@@ -5,7 +5,7 @@
 
 import { getReaderId } from './analytics';
 
-const API_BASE = 'https://api-node.schemaweaver.vivekmind.com';
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 export interface BlogPost {
   id: string;

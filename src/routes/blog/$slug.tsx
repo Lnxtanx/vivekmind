@@ -332,7 +332,8 @@ function useReadAnalytics(slug: string, postId: string) {
           scroll_depth: maxScrollPercent
         });
         
-        const endpoint = `https://api-node.schemaweaver.vivekmind.com/api/blog/${slug}/heartbeat`;
+        const apiBase = import.meta.env.VITE_API_URL || "http://localhost:3000";
+        const endpoint = `${apiBase}/api/blog/${slug}/heartbeat`;
         if (navigator.sendBeacon) {
           navigator.sendBeacon(endpoint, new Blob([payload], { type: "application/json" }));
         } else {

@@ -22,7 +22,7 @@ const globalStructuredData = {
       },
       "description":
         "Vivekmind is a software company building AI tools, developer tools, and infrastructure products.",
-      "email": "vivek@vivekmind.com",
+      "email": "support@vivekmind.com",
       "contactPoint": {
         "@type": "ContactPoint",
         "email": "support@vivekmind.com",
@@ -33,14 +33,14 @@ const globalStructuredData = {
           "@type": "SoftwareApplication",
           "@id": `${SITE_URL}/#schema-weaver`,
           "name": "Schema Weaver",
-          "url": "https://schemaweaver.vivekmind.com",
+          "url": "https://schemaweaver.dev",
           "applicationCategory": "DeveloperApplication",
-          "description": "AI-native PostgreSQL workspace for schema management, visual editing, and safe migrations.",
+          "description": "The first voice-native analytics workspace for PostgreSQL. Browse live data in a high-performance grid, ask Resona AI in plain English, or talk to your database by voice.",
           "brand": { "@id": `${SITE_URL}/#organization` },
           "isPartOf": { "@id": `${SITE_URL}/#organization` },
           "offers": {
             "@type": "Offer",
-            "url": "https://schemaweaver.vivekmind.com/pricing",
+            "url": "https://schemaweaver.dev/pricing",
             "price": "0",
             "priceCurrency": "USD"
           }

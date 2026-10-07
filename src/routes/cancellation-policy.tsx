@@ -28,7 +28,7 @@ function CancellationPolicyPage() {
     <div className="mx-auto max-w-3xl px-6 py-20 lg:py-24">
       <p className="font-mono text-xs uppercase tracking-[0.16em] text-primary">Legal</p>
       <h1 className="mt-4 text-3xl font-extrabold text-foreground md:text-4xl">Cancellation Policy</h1>
-      <p className="mt-2 text-sm text-muted-foreground">Last updated: April 2026</p>
+      <p className="mt-2 text-sm text-muted-foreground">Last updated: October 2026</p>
 
       <p className="mt-8 text-muted-foreground leading-relaxed">
         We understand that your needs may change. This policy explains how you can cancel your VivekMind subscriptions and what happens after you cancel.

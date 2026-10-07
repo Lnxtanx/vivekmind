@@ -4,10 +4,10 @@ import logo from "../assets/vivekmind-logo.png";
 const SITE_URL = "https://vivekmind.com";
 
 const PRODUCT_URLS = {
-  schemaWeaver: "https://schemaweaver.vivekmind.com",
-  sqlEditor: "https://sql-editor.schemaweaver.vivekmind.com",
-  dataExplorer: "https://data-explorer.schemaweaver.vivekmind.com",
-  swDocs: "https://docs.schemaweaver.vivekmind.com",
+  schemaWeaver: "https://schemaweaver.dev",
+  sqlEditor: "https://sql-editor.schemaweaver.dev",
+  dataExplorer: "https://data-explorer.schemaweaver.dev",
+  swDocs: "https://docs.schemaweaver.dev",
   codingCLI: "https://code.vivekmind.com/",
   press: "https://press.vivekmind.com",
 };
@@ -28,13 +28,15 @@ const allProductsStructuredData = {
         applicationCategory: "DeveloperApplication",
         operatingSystem: "Web Browser",
         description:
-          "AI-native PostgreSQL workspace for schema management, visual editing, and safe migrations.",
+          "The first voice-native analytics workspace for PostgreSQL. Browse live data in a high-performance grid, ask Resona AI in plain English, or talk to your database by voice.",
         featureList: [
+          "Voice queries — ask your database questions out loud",
+          "High-performance data grid with filters, sorting, and column stats",
+          "Resona AI agentic analysis in plain English",
+          "Export to CSV, Excel, JSON, SQL, or Google Sheets",
           "Visual SQL editor with auto-generated ER diagrams",
           "20-layer schema compiler with A–F quality grading",
-          "Resona AI assistant with 55+ tools",
           "Migration engine with drift detection and rollback",
-          "AI-powered Data Explorer with agentic workflows",
           "Team collaboration with role-based access",
         ],
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -169,12 +171,12 @@ function ProductsPage() {
           {/* Header row */}
           <div className="flex flex-wrap items-start justify-between gap-6">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Database Tools</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Analytics Workspace</p>
               <div className="mt-3 flex items-center gap-3">
                 <img src={logo} alt="" className="h-8 w-auto opacity-90" />
                 <h2 className="text-3xl font-extrabold text-foreground md:text-4xl">Schema Weaver</h2>
               </div>
-              <p className="mt-1 text-sm text-muted-foreground font-mono">schemaweaver.vivekmind.com</p>
+              <p className="mt-1 text-sm text-muted-foreground font-mono">schemaweaver.dev</p>
             </div>
             <a
               href={PRODUCT_URLS.schemaWeaver}
@@ -188,15 +190,15 @@ function ProductsPage() {
 
           {/* Description */}
           <p className="mt-8 max-w-3xl text-lg text-muted-foreground leading-relaxed">
-            A PostgreSQL schema management platform — write your schema, visualize it as an ER diagram, migrate safely to production, and explore your live data with AI. Built specifically for database teams and backend developers.
+            The first voice-native analytics workspace for PostgreSQL. Browse live data in a high-performance grid, ask Resona AI in plain English, or talk to your database by voice — with a visual SQL editor, interactive ER diagrams, and safe migrations alongside. Built specifically for database teams and backend developers.
           </p>
 
           {/* Sub-product links */}
           <div className="mt-8 flex flex-wrap gap-3">
             {[
-              { label: "SQL Editor", href: PRODUCT_URLS.sqlEditor, sub: "sql-editor.schemaweaver.vivekmind.com" },
-              { label: "Data Explorer", href: PRODUCT_URLS.dataExplorer, sub: "data-explorer.schemaweaver.vivekmind.com" },
-              { label: "Documentation", href: PRODUCT_URLS.swDocs, sub: "docs.schemaweaver.vivekmind.com" },
+              { label: "Data Explorer", href: PRODUCT_URLS.dataExplorer, sub: "data-explorer.schemaweaver.dev" },
+              { label: "SQL Editor", href: PRODUCT_URLS.sqlEditor, sub: "sql-editor.schemaweaver.dev" },
+              { label: "Documentation", href: PRODUCT_URLS.swDocs, sub: "docs.schemaweaver.dev" },
             ].map((item) => (
               <a
                 key={item.label}
@@ -218,28 +220,28 @@ function ProductsPage() {
           <div className="mt-14 grid gap-0 sm:grid-cols-2 lg:grid-cols-3">
             {[
               {
-                title: "Visual SQL Editor",
-                desc: "Write PostgreSQL DDL across multi-file projects with syntax highlighting, auto-complete, and live schema analysis.",
-              },
-              {
-                title: "Auto ER Diagram",
-                desc: "Your entity-relationship diagram updates in real time as you type. Drag, zoom, and explore every table relationship.",
-              },
-              {
-                title: "Schema Compiler",
-                desc: "20-layer static analysis gives your schema an A–F grade with detailed issues: missing indexes, RLS gaps, unsafe casts, naming problems, and more.",
-              },
-              {
-                title: "Migration Engine",
-                desc: "Pull live schema, diff changes, and push with advisory locks, drift detection, and one-click rollback to any prior snapshot.",
+                title: "Voice Queries",
+                desc: "Start a voice session and ask your database questions out loud. Speak naturally and get answers in plain English — no query syntax required.",
               },
               {
                 title: "Resona AI",
-                desc: "55+ AI tools purpose-built for schema work — generate tables, write migrations, explain policies, review your entire schema in plain English.",
+                desc: "Ask Resona AI to write queries, analyze columns, and build reports from your data. Agentic analysis loops return tables, charts, and stats.",
               },
               {
-                title: "Data Explorer",
-                desc: "Browse tables, run SQL, and ask natural-language questions. Resona AI runs agentic analysis loops and returns tables, charts, and stats.",
+                title: "High-Performance Grid",
+                desc: "Browse any table with typed filters, server-side sorting, and column statistics — null rates, distinct counts, and value distributions.",
+              },
+              {
+                title: "Dashboards & Exports",
+                desc: "Generate a dashboard of KPI cards, trends, and cohorts from your whole database, then export the view or an entire schema to CSV, Excel, JSON, SQL, or Google Sheets.",
+              },
+              {
+                title: "Visual SQL Editor",
+                desc: "Write PostgreSQL DDL across multi-file projects with syntax highlighting, auto-complete, and an interactive ER diagram that updates as you type.",
+              },
+              {
+                title: "Schema Compiler & Migrations",
+                desc: "20-layer static analysis grades your schema A–F. Pull live schema, diff changes, and push with advisory locks, drift detection, and one-click rollback.",
               },
             ].map((f) => (
               <div key={f.title} className="border-t border-border py-6 pr-8">

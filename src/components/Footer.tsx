@@ -2,11 +2,11 @@ import { Link } from "@tanstack/react-router";
 import logo from "../assets/vivekmind-logo.png";
 
 const PRODUCT_URLS = {
-  schemaWeaver: "https://schemaweaver.vivekmind.com",
-  sqlEditor: "https://sql-editor.schemaweaver.vivekmind.com",
-  dataExplorer: "https://data-explorer.schemaweaver.vivekmind.com",
-  swDocs: "https://docs.schemaweaver.vivekmind.com",
-  pricing: "https://schemaweaver.vivekmind.com/pricing",
+  schemaWeaver: "https://schemaweaver.dev",
+  sqlEditor: "https://sql-editor.schemaweaver.dev",
+  dataExplorer: "https://data-explorer.schemaweaver.dev",
+  swDocs: "https://docs.schemaweaver.dev",
+  pricing: "https://schemaweaver.dev/pricing",
   vivekmindCli: "https://code.vivekmind.com/",
   press: "https://press.vivekmind.com",
 };
@@ -125,7 +125,7 @@ export function Footer() {
         <div className="mt-14 flex flex-col gap-3 border-t border-background/10 pt-8 text-xs opacity-50 md:flex-row md:items-center md:justify-between">
           <div className="flex flex-wrap gap-x-5 gap-y-1">
             <a href="mailto:support@vivekmind.com" className="hover:opacity-80">support@vivekmind.com</a>
-            <a href="mailto:vivek@vivekmind.com" className="hover:opacity-80">vivek@vivekmind.com</a>
+            <a href="mailto:support@schemaweaver.dev" className="hover:opacity-80">support@schemaweaver.dev</a>
           </div>
           <p>© 2026 VivekMind. All rights reserved.</p>
         </div>
